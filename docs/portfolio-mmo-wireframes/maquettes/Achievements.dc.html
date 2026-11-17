@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Faits d'armes, la vitrine</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.m-circle{border-radius:999px}
+.m-shield{clip-path:polygon(0 0,100% 0,100% 58%,50% 100%,0 58%)}
+.m-star{clip-path:polygon(50% 0,62% 20%,85% 15%,80% 38%,100% 50%,80% 62%,85% 85%,62% 80%,50% 100%,38% 80%,15% 85%,20% 62%,0 50%,20% 38%,15% 15%,38% 20%)}
+.m-diamond{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.m-hex{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.m-arch{border-radius:999px 999px 10px 10px}
+.plaque{clip-path:polygon(6% 0,94% 0,100% 50%,94% 100%,6% 100%,0 50%)}
+.medal{transform-origin:50% 0;transition:transform .25s cubic-bezier(.3,1.6,.5,1);animation:hang .7s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:var(--d,0s)}
+.medal:hover{animation:swingm 1s ease-in-out}
+@keyframes swingm{20%{transform:rotate(9deg)}50%{transform:rotate(-7deg)}80%{transform:rotate(3deg)}}
+@keyframes hang{from{opacity:0;transform:translateY(-40px) rotate(14deg)}}
+.glint{position:absolute;width:14px;height:14px;background:#ffffff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);transform:scale(0);animation:glint 5s ease-in-out infinite;animation-delay:var(--g,0s);pointer-events:none}
+@keyframes glint{0%,75%,100%{transform:scale(0) rotate(0deg)}85%{transform:scale(1.3) rotate(45deg)}93%{transform:scale(0) rotate(90deg)}}
+.tab{transition:transform .2s}
+.tab:hover{transform:translateY(3px)}
+.big{animation:present0 .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes present0{from{opacity:0;transform:scale(.4) rotate(-20deg)}}
+@keyframes present1{from{opacity:0;transform:scale(.4) rotate(20deg)}}
+a{color:#2a2a28}a:hover{color:#000}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #8a8a86">
+  <div style="position: absolute; left: 60px; top: 30px; display: flex; flex-direction: column; gap: 2px">
+    <span style="font-size: 11px; letter-spacing: .16em; color: #f4f4f2">HAUTS FAITS</span>
+    <span style="font-size: 38px; font-weight: 800; line-height: 1.05">Salle des trophées</span>
+  </div>
+  <div style="position: absolute; left: 470px; top: 38px; display: flex; gap: 10px">
+    <span class="plaque" style="padding: 8px 30px; background: #f4f4f2; display: flex; flex-direction: column; align-items: center"><span style="font-size: 20px; font-weight: 800; line-height: 1">[X]</span><span style="font-size: 10px; font-weight: 700">points</span></span>
+    <span class="plaque" style="padding: 8px 30px; background: #f4f4f2; display: flex; flex-direction: column; align-items: center"><span style="font-size: 20px; font-weight: 800; line-height: 1">[X]</span><span style="font-size: 10px; font-weight: 700">projets livrés</span></span>
+    <span class="plaque" style="padding: 8px 30px; background: #f4f4f2; display: flex; flex-direction: column; align-items: center"><span style="font-size: 20px; font-weight: 800; line-height: 1">[X]</span><span style="font-size: 10px; font-weight: 700">ateliers animés</span></span>
+  </div>
+
+  <div role="group" aria-label="Catégories" style="position: absolute; left: 80px; top: 122px; display: flex; gap: 6px">
+    <sc-for list="{{cats}}" as="c" hint-placeholder-count="5">
+      <button type="button" class="tab" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">{{c.name}}</button>
+    </sc-for>
+  </div>
+
+  <div style="position: absolute; left: 60px; top: 160px; width: 800px; height: 700px; box-sizing: border-box; background: #2a2a28; border: 14px solid #2a2a28; box-shadow: inset 0 0 0 2px #6f6f6b, 10px 14px 0 rgba(42,42,40,.35); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 8px">
+    <sc-for list="{{cells}}" as="c" hint-placeholder-count="12">
+      <div style="{{c.cell}}">
+        <span style="position: absolute; left: 50%; top: 8px; width: 10px; height: 10px; margin-left: -5px; border-radius: 999px; background: #2a2a28; box-shadow: 0 0 0 2px #f4f4f2"></span>
+        <button type="button" class="medal" onClick="{{c.pick}}" aria-label="{{c.title}}, {{c.rarity}}" aria-pressed="{{c.pressed}}" style="{{c.btn}}">
+          <span style="width: 3px; height: 22px; background: #2a2a28"></span>
+          <span style="width: 16px; height: 16px; box-sizing: border-box; border: 3px solid #2a2a28; border-radius: 999px; margin-top: -3px"></span>
+          <span style="{{c.mountWrap}}">
+            <span class="{{c.shape}}" style="position: absolute; inset: 0; background: #2a2a28"></span>
+            <span class="{{c.shape}}" style="position: absolute; inset: 5px; background: #c4c4c0"></span>
+            <svg width="{{c.g}}" height="{{c.g}}" style="{{c.gemPos}}" aria-hidden="true">
+              <path d="{{c.fa}}" fill="#f4f4f2"/><path d="{{c.fb}}" fill="#c4c4c0"/><path d="{{c.fc}}" fill="#a3a39f"/>
+              <path d="{{c.out}}" fill="none" stroke="#2a2a28" stroke-width="2"/>
+              <path d="{{c.table}}" fill="#ecece9" stroke="#2a2a28" stroke-width="1.5"/>
+            </svg>
+            <span class="glint" style="{{c.glint}}"></span>
+          </span>
+        </button>
+        <span style="{{c.plate}}">{{c.title}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <section aria-label="Écrin du trophée choisi" style="position: absolute; left: 900px; top: 122px; width: 480px; height: 738px; box-sizing: border-box; background: #2a2a28; border: 3px solid #2a2a28; box-shadow: inset 0 0 0 5px #2a2a28, inset 0 0 0 7px #8a8a86, 10px 14px 0 rgba(42,42,40,.35); padding: 26px; display: flex; flex-direction: column; gap: 16px; color: #f4f4f2">
+    <div style="height: 230px; flex: none; border-radius: 40px; background: #6f6f6b; box-shadow: inset 0 6px 18px rgba(0,0,0,.45); display: grid; place-items: center; position: relative">
+      <span class="big" style="{{sel.bigWrap}}">
+        <span class="{{sel.shape}}" style="position: absolute; inset: 0; background: #2a2a28"></span>
+        <span class="{{sel.shape}}" style="position: absolute; inset: 8px; background: #c4c4c0"></span>
+        <svg width="110" height="110" style="position: absolute; left: 50%; top: 50%; margin: -55px 0 0 -55px" aria-hidden="true">
+          <path d="{{sel.fa}}" fill="#f4f4f2"/><path d="{{sel.fb}}" fill="#c4c4c0"/><path d="{{sel.fc}}" fill="#a3a39f"/>
+          <path d="{{sel.out}}" fill="none" stroke="#2a2a28" stroke-width="2.5"/>
+          <path d="{{sel.table}}" fill="#ecece9" stroke="#2a2a28" stroke-width="2"/>
+        </svg>
+        <span class="glint" style="left: 70%; top: 12%; --g: 1s"></span>
+      </span>
+      <span style="position: absolute; left: 20px; top: 16px; font-size: 11px; font-weight: 800; letter-spacing: .14em">ÉCRIN</span>
+    </div>
+    <div style="flex: 1; background: #f4f4f2; color: #2a2a28; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .14em">{{sel.rarity}} · {{sel.meta}}</span>
+      <span style="font-size: 26px; font-weight: 800; line-height: 1.15">{{sel.title}}</span>
+      <span style="font-size: 14px; line-height: 1.5">{{sel.sub}}</span>
+      <span style="height: 1.5px; background: #2a2a28"></span>
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #5f5f5b">CITATION</span>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <sc-for list="{{sel.criteria}}" as="cr" hint-placeholder-count="3"><span style="font-size: 14px; display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; background: #2a2a28; transform: rotate(45deg); flex: none"></span>{{cr}}</span></sc-for>
+      </div>
+      <span style="font-size: 12px; color: #5f5f5b">Décerné le [date] · [X] points</span>
+      <a href="#" style="margin-top: auto; height: 50px; background: #2a2a28; color: #f4f4f2; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; text-decoration: none">Lire l'étude de cas</a>
+    </div>
+  </section>
+
+  <a href="HUD.dc.html" aria-label="Fermer" style="position: absolute; right: 36px; top: 30px; width: 60px; height: 60px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: grid; place-items: center; font-size: 22px; text-decoration: none; z-index: 6">✕</a>
+  <span style="position: absolute; left: 60px; bottom: 8px; font-size: 12px; color: #1f4a8a; background: #f4f4f2; padding: 2px 8px">La vitrine s'ouvre comme un coffret · survol : la médaille se balance · clic : elle est décrochée et posée dans l'écrin</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { cat: 'all', sel: 'smg' }; }
+  renderVals() {
+    var self = this;
+    var all = [
+      { id: 'smg', cat: 'metier', r: 'L', shape: 'm-star', title: 'Bibliothèque SmgComponents', meta: 'UI/UX · Dev', sub: 'Concevoir et livrer une bibliothèque de composants Java Swing.', criteria: ['Audit des composants existants', 'Composants conçus et documentés', 'Adoption dans [X] écrans'] },
+      { id: 'import', cat: 'metier', r: 'E', shape: 'm-shield', title: 'Refonte « Import grid »', meta: 'UI/UX · Dev', sub: 'Fusionner deux parcours d’import en un seul écran.', criteria: ['Entretiens et observation', 'Maquettes validées en atelier', 'Écran livré en MVVM'] },
+      { id: 'obs', cat: 'metier', r: 'E', shape: 'm-circle', title: 'Sessions d’observation', meta: 'UI/UX', sub: 'Observer des utilisateurs experts en situation réelle.', criteria: ['Guide d’entretien', 'Grille d’observation', 'Synthèse des frictions'] },
+      { id: 'fit', cat: 'clients', r: 'E', shape: 'm-hex', title: 'FIT DISTANCE', meta: 'UI/UX · Dev', sub: 'App de coaching Pilates pour une coach indépendante.', criteria: ['Parcours élève et coach', 'Interface livrée', 'App en production'] },
+      { id: 'layer', cat: 'metier', r: 'R', shape: 'm-diamond', title: 'Layer management', meta: 'UI/UX', sub: 'Fusionner deux listes en une seule liste moderne.', criteria: ['Analyse de l’existant', 'Nouvelle liste unifiée', '[Résultat]'] },
+      { id: 'chien', cat: 'clients', r: 'R', shape: 'm-arch', title: 'AuTour de mon chien', meta: 'UI/UX · Illustratrice', sub: 'Site vitrine pour une éducatrice canine.', criteria: ['Repositionnement de l’offre', 'Maquettes', 'Site en ligne'] },
+      { id: 'quiz', cat: 'clients', r: 'R', shape: 'm-circle', title: 'Quiz chronométré', meta: 'UI/UX · Dev', sub: 'App de quiz avec QR code et podium pour un événement.', criteria: ['Parcours joueur', 'Écran de podium', 'Utilisée en soirée'] },
+      { id: 'sismo', cat: 'illu', r: 'R', shape: 'm-shield', title: 'Icône du chatbot Sismo', meta: 'Illustratrice', sub: 'Donner une identité à l’assistant d’une application métier.', criteria: ['Pistes graphiques', 'Palette et états de survol', 'Icône intégrée'] },
+      { id: 'cube', cat: 'illu', r: 'R', shape: 'm-hex', title: 'Illustration du cube IJK', meta: 'Illustratrice', sub: 'Schéma vectoriel pour expliquer les axes d’une grille.', criteria: ['Dessin vectoriel', 'Variantes d’axes', 'Intégré à l’application'] },
+      { id: 'ferme', cat: 'perso', r: 'R', shape: 'm-diamond', title: 'Ferme Incrémentale', meta: 'Dev', sub: 'Jeu incrémental en Godot et C#.', criteria: ['Boucle de jeu', 'Interface', '[Statut]'] },
+      { id: 'bots', cat: 'perso', r: 'C', shape: 'm-arch', title: 'Bots CodinGame', meta: 'Dev', sub: 'Bots heuristiques en compétition de programmation.', criteria: ['[Compétition]', '[Classement]', '[Approche]'] },
+      { id: '', cat: '', r: '', shape: 'm-circle', title: 'Emplacement libre', meta: '', sub: '', criteria: [] }
+    ];
+    var RN = { L: 'LÉGENDAIRE', E: 'ÉPIQUE', R: 'RARE', C: 'COMMUN' };
+    var velvet = { L: 'repeating-linear-gradient(90deg, #dcdcd8 0 14px, #cfcfcb 14px 16px)', E: '#a3a39f', R: '#7d7d79', C: '#6a6a66', '': '#5f5f5b' };
+    var mount = { L: 104, E: 88, R: 76, C: 66 }, gemS = { L: 66, E: 54, R: 46, C: 38 };
+    var f1 = function (n) { return n.toFixed(1); };
+    function gem(g, k) {
+      var V = [[g * 0.25, g * 0.07], [g * 0.75, g * 0.07], [g, g / 2], [g * 0.75, g * 0.93], [g * 0.25, g * 0.93], [0, g / 2]], c = g / 2;
+      var I = V.map(function (v) { return [c + (v[0] - c) * k, c + (v[1] - c) * k]; });
+      var pt = function (q) { return f1(q[0]) + ' ' + f1(q[1]); }, fac = ['', '', ''];
+      for (var m = 0; m < 6; m++) { var m2 = (m + 1) % 6; fac[[0, 1, 2, 1, 0, 2][m]] += 'M' + pt(V[m]) + 'L' + pt(V[m2]) + 'L' + pt(I[m2]) + 'L' + pt(I[m]) + 'Z '; }
+      return { fa: fac[0], fb: fac[1], fc: fac[2], out: 'M' + V.map(pt).join('L') + 'Z', table: 'M' + I.map(pt).join('L') + 'Z' };
+    }
+    var cells = all.map(function (a, i) {
+      var empty = !a.id, on = a.id === self.state.sel;
+      var match = self.state.cat === 'all' || a.cat === self.state.cat;
+      var ms = mount[a.r] || 70, gs = gemS[a.r] || 40, G = gem(gs, 0.5);
+      return { title: a.title, rarity: RN[a.r] || '', pressed: String(on), g: gs, shape: a.shape,
+        fa: G.fa, fb: G.fb, fc: G.fc, out: G.out, table: G.table,
+        pick: function () { if (!empty) self.setState({ sel: a.id }); },
+        cell: 'position: relative; background: ' + velvet[a.r] + '; display: flex; flex-direction: column; align-items: center; padding-top: 12px; opacity: ' + (match || empty ? 1 : 0.28) + '; transition: opacity .3s; outline: ' + (on ? '3px solid #f4f4f2' : 'none') + '; outline-offset: -6px;',
+        btn: '--d: ' + (i * 0.05).toFixed(2) + 's; display: ' + (empty ? 'none' : 'flex') + '; flex-direction: column; align-items: center; background: transparent; border: 0; padding: 0; cursor: pointer; opacity: ' + (on ? 0.22 : 1) + ';',
+        mountWrap: 'position: relative; display: block; width: ' + ms + 'px; height: ' + ms + 'px; margin-top: -3px;',
+        gemPos: 'position: absolute; left: 50%; top: 50%; margin: ' + (-gs / 2) + 'px 0 0 ' + (-gs / 2) + 'px;',
+        glint: 'left: 68%; top: 10%; --g: ' + (i * 0.4).toFixed(1) + 's;',
+        plate: 'position: absolute; left: 10px; right: 10px; bottom: 10px; text-align: center; font-size: 11px; font-weight: 800; line-height: 1.2; padding: 3px 4px; background: ' + (empty ? 'transparent' : '#f4f4f2') + '; color: ' + (empty ? '#dcdcd8' : '#2a2a28') + '; border: ' + (empty ? '1.5px dashed #dcdcd8' : '1.5px solid #2a2a28') + ';' };
+    });
+    var cats = [['all', 'Tous'], ['metier', 'Métier'], ['clients', 'Clients'], ['illu', 'Illustration'], ['perso', 'Perso']].map(function (c) {
+      var on = c[0] === self.state.cat;
+      return { name: c[1], pressed: String(on), pick: function () { self.setState({ cat: c[0] }); },
+        style: 'height: 38px; padding: 0 16px; border: 2px solid #2a2a28; border-bottom: 0; cursor: pointer; font: inherit; font-size: 13px; font-weight: 800; background: ' + (on ? '#2a2a28' : '#f4f4f2') + '; color: ' + (on ? '#f4f4f2' : '#2a2a28') + ';' };
+    });
+    var s = all.filter(function (a) { return a.id === self.state.sel; })[0] || all[0];
+    var BG = gem(110, 0.46);
+    return { cats: cats, cells: cells,
+      sel: { title: s.title, rarity: RN[s.r], meta: s.meta, sub: s.sub, criteria: s.criteria, shape: s.shape,
+        fa: BG.fa, fb: BG.fb, fc: BG.fc, out: BG.out, table: BG.table,
+        bigWrap: 'position: relative; display: block; width: 170px; height: 170px; animation-name: present' + (all.indexOf(s) % 2) + ';' } };
+  }
+}
+</script>
+</body>
+</html>

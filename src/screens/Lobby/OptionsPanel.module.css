@@ -1,0 +1,151 @@
+.panel {
+  position: absolute;
+  left: 796px;
+  bottom: 204px;
+  z-index: var(--z-popover);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px 14px;
+  background: var(--c-paper);
+  border: var(--bw-thick) solid var(--c-ink);
+  box-shadow: var(--sh-hard-ink);
+  font-size: var(--fs-base);
+  transform-origin: 85% 100%;
+}
+.panel:focus {
+  outline: none;
+}
+
+.arrow {
+  position: absolute;
+  right: 36px;
+  bottom: -13px;
+  width: 20px;
+  height: 20px;
+  background: var(--c-paper);
+  border-right: var(--bw-thick) solid var(--c-ink);
+  border-bottom: var(--bw-thick) solid var(--c-ink);
+  transform: rotate(45deg);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-caps);
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  cursor: pointer;
+  font-size: var(--fs-md);
+}
+
+.lute {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  height: 124px;
+  padding: 0 12px 0 96px;
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper-2);
+  cursor: pointer;
+  text-align: left;
+}
+
+.luteArt {
+  position: absolute !important;
+  left: 8px;
+  top: 2px;
+  width: 80px;
+  height: 120px;
+}
+
+.luteBody {
+  position: absolute;
+  left: -10px;
+  top: -66px;
+  width: 100px;
+  height: 200px;
+  display: block;
+  transform: rotate(22deg) scale(0.6);
+  transform-origin: 50% 75%;
+  transition: transform 0.3s var(--ease-spring);
+}
+.lute:hover .luteBody,
+.lute:focus-visible .luteBody {
+  transform: rotate(12deg) scale(0.68);
+}
+.luteBody > span {
+  position: absolute;
+  border: var(--bw) solid var(--c-ink);
+}
+.lHead { left: 36px; top: 0; width: 26px; height: 30px; background: var(--c-stone-4); transform: rotate(-28deg); transform-origin: 50% 100%; }
+.lNeck { left: 41px; top: 22px; width: 18px; height: 80px; background: var(--c-stone-3); }
+.lBowl { left: 0; top: 84px; width: 100px; height: 116px; background: var(--c-paper-2); border-radius: 50% 50% 50% 50% / 38% 38% 62% 62%; }
+.lRose { left: 36px; top: 112px; width: 28px; height: 28px; border-radius: var(--r-pill); background: var(--c-stone-4); }
+.lBridge { left: 32px; top: 168px; width: 36px; height: 6px; background: var(--c-ink); border: 0 !important; }
+.luteBody > .lStrings {
+  left: 45px;
+  top: 24px;
+  width: 10px;
+  height: 146px;
+  border: 0;
+  border-left: var(--bw-hair) solid var(--c-ink);
+  border-right: var(--bw-hair) solid var(--c-ink);
+}
+.lStrings > span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  margin-left: -1px;
+  background: var(--c-ink);
+}
+.lStrings[data-on='true'] {
+  animation: kf-vibrate 0.1s linear infinite;
+}
+
+.note {
+  position: absolute;
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  opacity: 0;
+  pointer-events: none;
+  animation: kf-note 2.4s ease-out infinite;
+}
+
+.luteKicker {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.14em;
+}
+.luteLabel {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+}
+.luteHint {
+  font-size: var(--fs-sm);
+}
+
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-soft);
+}

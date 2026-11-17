@@ -1,0 +1,181 @@
+.bar {
+  position: absolute;
+  left: 354px;
+  bottom: 26px;
+  z-index: 11;
+  width: 732px;
+  height: 160px;
+  animation: kf-in-bottom 0.7s 0.3s var(--ease-out) backwards;
+}
+
+.links {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cell {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  /* le focus suit l'hexagone */
+  border-radius: 12px;
+}
+.cell:hover,
+.cell:focus-visible {
+  z-index: 30;
+}
+
+.pane {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transition: transform 0.22s var(--ease-spring);
+  animation: kf-pop 0.5s var(--ease-spring) backwards;
+  animation-delay: var(--d, 0s);
+}
+.cell:hover .pane,
+.cell:focus-visible .pane,
+.cell[aria-expanded='true'] .pane {
+  transform: translateY(-8px) scale(1.16);
+}
+.cell:active .pane {
+  transform: scale(0.95);
+}
+
+.gemSlot {
+  position: absolute !important;
+  inset: 0;
+}
+
+.mount {
+  position: absolute;
+  inset: -3px;
+  background: var(--c-gem-mount);
+}
+
+.gem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: filter 0.2s;
+}
+.cell:hover .gem,
+.cell:focus-visible .gem {
+  filter: brightness(1.1) contrast(1.15);
+}
+
+.icon {
+  position: absolute;
+}
+
+.cell:hover :global(.glint),
+.cell:focus-visible :global(.glint) {
+  animation-duration: 0.9s;
+}
+
+.key {
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  transform: translateX(-50%);
+  min-width: 20px;
+  padding: 0 4px;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  line-height: 1.4;
+  text-align: center;
+  border-radius: var(--r-sm);
+  box-shadow: 0 0 0 2px var(--c-paper);
+}
+.key[data-big='true'] {
+  font-size: 15px;
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  left: 50%;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  text-align: left;
+  border-radius: 10px 10px 10px 0;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  pointer-events: none;
+  transition: opacity var(--dur-fast), transform 0.2s;
+}
+.cell:hover .tip,
+.cell:focus-visible .tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.tipTitle {
+  font-size: var(--fs-base);
+}
+.tipMeta {
+  font-size: var(--fs-xs);
+  opacity: 0.8;
+}
+.tipDesc {
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+}
+
+.newTag {
+  position: absolute;
+  left: 400px;
+  top: -40px;
+  padding: 1px 7px;
+  background: var(--c-paper);
+  border: var(--bw) solid var(--c-ink);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  pointer-events: none;
+  animation: kf-bob 1s ease-in-out infinite;
+}
+
+.xp {
+  position: absolute;
+  left: 90px;
+  right: 90px;
+  top: 134px;
+  height: 12px;
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+}
+
+.xpFill {
+  height: 100%;
+  background: var(--c-stone-6);
+}
+
+.xpLabel {
+  position: absolute;
+  left: 50%;
+  top: 148px;
+  transform: translateX(-50%);
+  padding: 0 6px;
+  white-space: nowrap;
+  background: var(--c-paper);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+}

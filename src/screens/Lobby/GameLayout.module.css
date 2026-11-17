@@ -1,0 +1,6 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+.overlay:focus { outline: none; }

@@ -1,0 +1,134 @@
+.scene {
+  position: absolute;
+  inset: 0;
+}
+
+.layer {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
+}
+.layer > * {
+  pointer-events: auto;
+}
+.foreground > * {
+  pointer-events: none;
+}
+
+.moon {
+  position: absolute;
+  left: 1010px;
+  top: 110px;
+  width: 130px;
+  height: 130px;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: var(--bw) solid var(--c-scene-moon-border);
+}
+
+.cloud {
+  position: absolute;
+  left: 0;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  animation: kf-drift 40s linear infinite;
+}
+
+.mountains {
+  position: absolute;
+  left: -80px;
+  right: -80px;
+  top: 170px;
+  height: 420px;
+  background: var(--c-scene-mountains);
+}
+
+.hills {
+  position: absolute;
+  left: -80px;
+  right: -80px;
+  top: 350px;
+  height: 380px;
+  background: var(--c-scene-hills);
+}
+
+.decorLeft {
+  position: absolute !important;
+  left: 120px;
+  top: 340px;
+  width: 190px;
+  height: 210px;
+  border: var(--bw) solid var(--c-stone-4);
+  opacity: 0.9;
+}
+
+.decorRight {
+  position: absolute !important;
+  left: 1180px;
+  top: 430px;
+  width: 120px;
+  height: 230px;
+  border: var(--bw) solid var(--c-stone-4);
+  opacity: 0.9;
+}
+
+.sceneNote {
+  position: absolute;
+  left: 120px;
+  top: 560px;
+  padding: 3px 8px;
+  background: var(--c-paper);
+  font-size: var(--fs-sm);
+}
+
+.ground {
+  position: absolute;
+  left: -80px;
+  right: -80px;
+  top: 640px;
+  height: 400px;
+  background: var(--c-scene-ground);
+  border-radius: 50% 50% 0 0 / 60px 60px 0 0;
+}
+
+.hero {
+  position: absolute;
+  left: 540px;
+  top: 150px;
+  width: 360px;
+  height: 800px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--r-arch);
+}
+
+.heroArt {
+  position: absolute !important;
+  inset: 0;
+  background: var(--c-scene-hero);
+  border: var(--bw) solid var(--c-ink);
+  transform-origin: 50% 100%;
+  animation: kf-breathe 5s ease-in-out infinite;
+}
+.heroArt > span {
+  top: 290px;
+}
+
+.bush {
+  position: absolute;
+  border-radius: var(--r-pill);
+  background: var(--c-scene-foreground);
+  opacity: 0.85;
+}
+
+.mote {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  opacity: 0;
+  animation: kf-rise 7s linear infinite;
+}

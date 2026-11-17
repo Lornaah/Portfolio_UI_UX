@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>En jeu, écran principal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.arch{border-radius:200px 200px 6px 6px}
+.ribbon{clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%)}
+.pill{clip-path:polygon(10% 0,100% 0,90% 100%,0 100%)}
+.ticket{clip-path:polygon(0 0,100% 0,100% 36%,96% 50%,100% 64%,100% 100%,0 100%,0 64%,4% 50%,0 36%)}
+.oct{clip-path:polygon(24% 0,76% 0,100% 24%,100% 76%,76% 100%,24% 100%,0 76%,0 24%)}
+.slant{clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
+.mount{clip-path:polygon(0 100%,0 60%,8% 30%,15% 52%,24% 12%,33% 48%,41% 28%,50% 55%,60% 8%,70% 46%,78% 24%,88% 50%,95% 34%,100% 56%,100% 100%)}
+.hills{clip-path:polygon(0 100%,0 40%,12% 22%,26% 38%,40% 14%,55% 36%,70% 18%,84% 34%,100% 20%,100% 100%)}
+a{color:#2a2a28}a:hover{color:#000}
+.layer{position:absolute;inset:0;pointer-events:none;transition:transform .3s ease-out}
+.layer > *{pointer-events:auto}
+.in-l{animation:inl .6s cubic-bezier(.2,.8,.2,1) backwards}
+.in-r{animation:inr .6s .15s cubic-bezier(.2,.8,.2,1) backwards}
+.in-t{animation:intop .6s .1s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes inl{from{opacity:0;transform:translateX(-80px)}}
+@keyframes inr{from{opacity:0;transform:translateX(80px)}}
+@keyframes intop{from{opacity:0;transform:translate(-50%,-70px)}}
+.card{transform:rotate(var(--r,0deg));transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .35s;filter:drop-shadow(5px 7px 0 #6f6f6b);animation:drop .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0s)}
+.card:hover{transform:rotate(0deg) translateX(-10px) scale(1.04);filter:drop-shadow(10px 14px 0 #6f6f6b)}
+@keyframes drop{from{opacity:0;transform:translateY(-90px) rotate(calc(var(--r,0deg) * 4))}}
+.rune{transform:rotate(var(--r,0deg));transition:transform .25s cubic-bezier(.3,1.6,.5,1);animation:pop .5s cubic-bezier(.3,1.6,.5,1) backwards;animation-delay:var(--d,0s)}
+.spell:hover .rune{transform:translateY(-12px) rotate(0deg) scale(1.14)}
+.spell:active .rune{transform:rotate(0deg) scale(.94)}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.4)}}
+.orb{transition:transform .3s cubic-bezier(.3,1.6,.5,1);animation:pop .6s .5s cubic-bezier(.3,1.6,.5,1) backwards,halo 1.8s 2s ease-out infinite}
+.orbwrap:hover .orb{transform:scale(1.08)}
+@keyframes halo{from{box-shadow:0 0 0 4px #f4f4f2,0 0 0 6px #2a2a28,0 0 0 6px rgba(42,42,40,.5)}to{box-shadow:0 0 0 4px #f4f4f2,0 0 0 6px #2a2a28,0 0 0 26px rgba(42,42,40,0)}}
+.liquid{position:absolute;left:0;right:0;bottom:0;height:68%;background:#8a8a86;animation:rise2 2s .8s cubic-bezier(.2,.8,.2,1) backwards}
+.liquid::before{content:"";position:absolute;left:-50%;top:-112px;width:200%;height:120px;border-radius:42%;background:#dcdcd8;animation:wave 6s linear infinite}
+@keyframes wave{to{transform:rotate(360deg)}}
+@keyframes rise2{from{height:0}}
+.breathe{animation:breathe 5s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes breathe{50%{transform:scale(1.012)}}
+.mote{position:absolute;width:6px;height:6px;border-radius:999px;background:#f4f4f2;opacity:0;animation:rise 7s linear infinite;animation-delay:var(--d,0s)}
+@keyframes rise{15%{opacity:.9}to{transform:translate(40px,-300px);opacity:0}}
+.toast{animation:toast 14s 3s infinite backwards}
+@keyframes toast{0%{transform:translate(-50%,-260%)}6%,28%{transform:translate(-50%,0)}34%,100%{transform:translate(-50%,-260%)}}
+.cloud{animation:drift 40s linear infinite}
+@keyframes drift{from{transform:translateX(-200px)}to{transform:translateX(1700px)}}
+.swing{transform-origin:50% 0;animation:swing 4s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(-1deg)}}
+.caret{animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.bounce{animation:bounce 1s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(5px)}}
+.compass{transition:background-position .3s ease-out}
+.mini{transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.mini:hover{transform:translateY(-4px) rotate(-6deg)}
+.s-hex{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.in-b2{animation:inb2 .7s .3s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes inb2{from{opacity:0;transform:translateY(120px)}}
+.cell .pane{transition:transform .22s cubic-bezier(.3,1.6,.5,1);animation:pop .5s cubic-bezier(.3,1.6,.5,1) backwards;animation-delay:var(--d,0s)}
+.cell .glassin{transition:background-color .2s}
+.cell:hover{z-index:30}
+.cell:hover .pane{transform:translateY(-8px) scale(1.16)}
+.cell:hover .glassin{background:#ffffff}
+.cell:active .pane{transform:scale(.95)}
+.tipc{position:absolute;bottom:calc(100% + 18px);left:50%;width:230px;box-sizing:border-box;transform:translate(-50%,8px);opacity:0;pointer-events:none;transition:opacity .15s,transform .2s;background:#2a2a28;color:#f4f4f2;padding:10px 12px;display:flex;flex-direction:column;gap:3px;text-align:left;border-radius:10px 10px 10px 0}
+.cell:hover .tipc{opacity:1;transform:translate(-50%,0)}
+.shine{position:absolute;top:-20px;bottom:-20px;width:90px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 7s 2s ease-in-out infinite backwards}
+@keyframes shine{0%{left:-140px}35%,100%{left:700px}}
+.bob{animation:bob 1s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px) rotate(6deg)}}
+.cell .gem{transition:filter .2s}
+.cell:hover .gem{filter:brightness(1.1) contrast(1.15)}
+.glint{position:absolute;width:14px;height:14px;background:#ffffff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);transform:scale(0);animation:glint 4s ease-in-out infinite;animation-delay:var(--g,0s);pointer-events:none}
+@keyframes glint{0%,70%,100%{transform:scale(0) rotate(0deg)}80%{transform:scale(1.3) rotate(45deg)}90%{transform:scale(0) rotate(90deg)}}
+.cell:hover .glint{animation-duration:.9s}
+.scroll{position:absolute;width:30px;height:120px;padding:0;border:0;background:transparent;cursor:pointer;font:inherit;color:#2a2a28;transform-origin:50% 100%;transform:rotate(var(--r,0deg)) translateY(var(--y,0px));transition:transform .28s cubic-bezier(.3,1.6,.5,1)}
+.scroll:hover{transform:rotate(var(--r,0deg)) translateY(-32px)}
+.scroll .lab{transition:background-color .2s,color .2s}
+.scroll:hover .lab{background:#2a2a28;color:#f4f4f2}
+.bag{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.bagwrap:hover .bag{transform:rotate(-2deg)}
+@keyframes unroll0{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes unroll1{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes unroll2{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+.torn1{clip-path:polygon(2% 3%,14% 0,30% 2%,48% 0,66% 3%,84% 0,98% 2%,100% 20%,97% 42%,100% 63%,98% 84%,100% 96%,88% 100%,72% 97%,60% 100%,52% 94%,40% 99%,24% 96%,10% 100%,0 97%,3% 76%,0 54%,2% 30%)}
+.torn2{clip-path:polygon(0 4%,18% 0,40% 3%,62% 0,82% 4%,100% 0,97% 30%,100% 58%,98% 100%,80% 95%,64% 100%,58% 90%,44% 98%,22% 94%,4% 100%,2% 66%,0 38%)}
+.torn3{clip-path:polygon(4% 0,26% 4%,50% 0,74% 3%,96% 0,100% 34%,97% 70%,100% 100%,76% 96%,52% 100%,30% 95%,12% 100%,0 92%,3% 55%,0 22%)}
+.notice{transform:rotate(var(--r,0deg));transform-origin:50% 10px;transition:transform .35s cubic-bezier(.3,1.6,.5,1),filter .3s;filter:drop-shadow(3px 5px 0 rgba(42,42,40,.35));animation:pinin .6s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:var(--d,0s)}
+.notice:hover{transform:rotate(0deg) scale(1.08);filter:drop-shadow(6px 12px 0 rgba(42,42,40,.35));z-index:14}
+@keyframes pinin{from{opacity:0;transform:rotate(calc(var(--r,0deg) + 14deg)) translateY(-40px)}}
+.pin{position:absolute;left:50%;top:3px;width:18px;height:18px;margin-left:-9px;border-radius:999px;background:#2a2a28;box-shadow:inset 4px 4px 0 -1px #8a8a86,0 3px 0 rgba(42,42,40,.3)}
+.lute{transform:rotate(22deg) scale(.6);transform-origin:50% 75%;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.lutebtn:hover .lute{transform:rotate(12deg) scale(.68)}
+.vib{animation:vib .1s linear infinite}
+.optp{transform-origin:85% 100%;animation:optin .3s cubic-bezier(.3,1.4,.5,1)}
+@keyframes optin{from{opacity:0;transform:scale(.6) translateY(30px)}}
+@keyframes vib{50%{transform:translateX(1.5px)}}
+.note{position:absolute;font-size:22px;font-weight:800;opacity:0;animation:noteup 2.4s ease-out infinite;animation-delay:var(--d,0s);pointer-events:none}
+@keyframes noteup{10%{opacity:1}to{transform:translate(26px,-90px) rotate(18deg);opacity:0}}
+.in-t2{animation:int2 .8s .2s cubic-bezier(.3,1.4,.5,1) backwards}
+@keyframes int2{from{transform:translateY(-260px)}}
+.pend{transform-origin:50% 0;animation:pend 5s ease-in-out infinite}
+@keyframes pend{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+.dialw{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.astro:hover .dialw{transform:scale(1.1)}
+.aring{transition:transform .35s ease-out}
+.aneedle{transition:transform .25s ease-out}
+.ticks{background:repeating-conic-gradient(#2a2a28 0 1.2deg,transparent 1.2deg 10deg);-webkit-mask:radial-gradient(circle,transparent 66px,#000 67px,#000 74px,transparent 75px);mask:radial-gradient(circle,transparent 66px,#000 67px,#000 74px,transparent 75px)}
+.mpin{transform:scale(0);transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
+.astro:hover .mpin{transform:scale(1)}
+.star4{clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+.blip{animation:blip 1.6s ease-out infinite}
+@keyframes blip{from{box-shadow:0 0 0 0 rgba(42,42,40,.6)}to{box-shadow:0 0 0 14px rgba(42,42,40,0)}}
+.aring{animation:spin 60s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.aneedle{animation:wob 6s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(16deg)}}
+.astro:hover .aring{animation-duration:8s}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #dededa">
+
+  <div class="layer" style="{{l1}}">
+    <div style="position: absolute; left: 1010px; top: 110px; width: 130px; height: 130px; border-radius: 999px; background: #f4f4f2; border: 2px solid #c4c4c0"></div>
+    <div class="cloud" style="position: absolute; left: 0; top: 150px; width: 220px; height: 44px; border-radius: 999px; background: #f4f4f2; opacity: .8"></div>
+    <div class="cloud" style="position: absolute; left: 0; top: 250px; width: 150px; height: 32px; border-radius: 999px; background: #f4f4f2; opacity: .6; animation-delay: -18s"></div>
+  </div>
+  <div class="layer" style="{{l2}}">
+    <div class="mount" style="position: absolute; left: -80px; right: -80px; top: 170px; height: 420px; background: #cdcdc9"></div>
+  </div>
+  <div class="layer" style="{{l3}}">
+    <div class="hills" style="position: absolute; left: -80px; right: -80px; top: 350px; height: 380px; background: #bcbcb8"></div>
+    <div class="ph" style="position: absolute; left: 120px; top: 340px; width: 190px; height: 210px; border: 2px solid #9a9a96; opacity: .9"></div>
+    <div class="arch ph" style="position: absolute; left: 1180px; top: 430px; width: 120px; height: 230px; border: 2px solid #9a9a96; opacity: .9"></div>
+    <span style="position: absolute; left: 120px; top: 560px; font-size: 12px; background: #f4f4f2; padding: 3px 8px">Scène de jeu en plein écran · illustrée, en calques</span>
+  </div>
+  <div class="layer" style="{{l4}}">
+    <div style="position: absolute; left: -80px; right: -80px; top: 640px; height: 400px; background: #aaaaa6; border-radius: 50% 50% 0 0 / 60px 60px 0 0"></div>
+    <button type="button" onClick="{{nextLine}}" aria-label="Parler à Justine" class="arch breathe" style="position: absolute; left: 540px; top: 150px; width: 360px; height: 800px; background: #8f8f8b; border: 2px solid #2a2a28; display: flex; align-items: flex-start; justify-content: center; padding: 260px 0 0; cursor: pointer; font: inherit; color: #2a2a28">
+      <span style="font-size: 12px; background: #f4f4f2; padding: 4px 8px; text-align: center">Justine, en grand au premier plan<br>respire, cligne, cheveux et tissu animés</span>
+    </button>
+  </div>
+  <div class="layer" style="{{l5}}">
+    <div style="position: absolute; left: -90px; top: 600px; width: 190px; height: 190px; border-radius: 999px; background: #7d7d79; opacity: .85; pointer-events: none"></div>
+    <div style="position: absolute; right: -90px; top: 660px; width: 200px; height: 200px; border-radius: 999px; background: #7d7d79; opacity: .85; pointer-events: none"></div>
+    <span class="mote" style="left: 300px; top: 700px; --d: 0s"></span>
+    <span class="mote" style="left: 900px; top: 640px; --d: 2.4s"></span>
+    <span class="mote" style="left: 1100px; top: 700px; --d: 3.1s"></span>
+    <span class="mote" style="left: 380px; top: 520px; --d: 5.3s"></span>
+  <button type="button" onClick="{{nextLine}}" aria-label="Réplique suivante" style="position: absolute; left: 28px; bottom: 28px; width: 310px; padding: 0; border: 0; background: transparent; cursor: pointer; font: inherit; color: #2a2a28; text-align: left; z-index: 10; font-size: 16px; font-family: Inter, system-ui, sans-serif">
+    <span class="slant" style="display: inline-block; background: #2a2a28; color: #f4f4f2; font-size: 13px; font-weight: 800; letter-spacing: .14em; padding: 5px 28px; margin-left: 16px; position: relative; z-index: 1">JUSTINE</span>
+    <span style="display: block; margin-top: -8px; background: rgba(244,244,242,.94); border-top: 3px solid #2a2a28; border-bottom: 1.5px solid #2a2a28; padding: 20px 20px 16px; min-height: 108px; box-sizing: border-box; position: relative">
+      <span style="font-size: 16px; line-height: 1.5; font-weight: 500">{{typed}}<span class="caret">▌</span></span>
+      <span class="bounce" style="position: absolute; right: 12px; bottom: 6px; font-size: 12px; font-weight: 800">▼</span>
+    </span>
+  </button></div>
+
+  <div class="in-l" style="position: absolute; left: 28px; top: 24px; display: flex; align-items: flex-start; z-index: 10">
+    <div class="swing" style="width: 96px; height: 106px; background: #f4f4f2; border: 2px solid #2a2a28; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2">
+      <span style="font-size: 10px; font-weight: 700; letter-spacing: .1em">NIV.</span>
+      <span style="width: 54px; height: 54px; border-radius: 999px; border: 3px solid #2a2a28; display: grid; place-items: center; font-size: 22px; font-weight: 800">[X]</span>
+      <span style="position: absolute; bottom: -11px; width: 20px; height: 20px; background: #2a2a28; transform: rotate(45deg)"></span>
+    </div>
+    <div class="ribbon" style="margin-left: -10px; margin-top: 14px; width: 330px; padding: 10px 40px 10px 24px; background: #f4f4f2; display: flex; flex-direction: column; gap: 3px; box-sizing: border-box">
+      <span style="font-size: 19px; font-weight: 800">Justine Herault</span>
+      <span style="font-size: 12px">UI/UX Designer · Développeuse · Illustratrice</span>
+      <span style="font-size: 11px; font-weight: 700">● Disponible · [mission / poste]</span>
+    </div>
+  </div>
+
+  <a href="Map.dc.html" class="astro in-t2" aria-label="Ouvrir la carte du monde" style="position: absolute; left: 1232px; top: 0; width: 180px; height: 260px; text-decoration: none; z-index: 10">
+    <span class="pend" style="position: absolute; inset: 0; display: block">
+      <span style="position: absolute; left: 89px; top: 0; width: 3px; height: 34px; background: repeating-linear-gradient(#2a2a28 0 6px, transparent 6px 9px)"></span>
+      <span style="position: absolute; left: 80px; top: 28px; width: 20px; height: 20px; box-sizing: border-box; border-radius: 999px; border: 3px solid #2a2a28"></span>
+      <span class="dialw" style="position: absolute; left: 10px; top: 44px; width: 160px; height: 160px; display: block">
+        <span class="aring" style="{{ring}}">
+          <span style="position: absolute; inset: 0; border-radius: 999px; background: #f4f4f2; border: 4px solid #2a2a28; box-sizing: border-box"></span>
+          <span class="ticks" style="position: absolute; inset: 0; border-radius: 999px"></span>
+          <span style="position: absolute; left: 50%; top: -3px; transform: translateX(-50%); font-size: 11px; font-weight: 800; background: #2a2a28; color: #f4f4f2; padding: 0 5px; border-radius: 3px">N</span>
+          <span style="position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%); font-size: 10px; font-weight: 800; background: #f4f4f2; padding: 0 3px">S</span>
+          <span style="position: absolute; top: 50%; right: -1px; transform: translateY(-50%); font-size: 10px; font-weight: 800; background: #f4f4f2; padding: 0 2px">E</span>
+          <span style="position: absolute; top: 50%; left: -1px; transform: translateY(-50%); font-size: 10px; font-weight: 800; background: #f4f4f2; padding: 0 2px">O</span>
+        </span>
+        <span class="ph" style="position: absolute; inset: 24px; border-radius: 999px; border: 2px solid #2a2a28; overflow: hidden; display: block">
+          <span class="mpin" style="position: absolute; left: 22px; top: 30px; width: 12px; height: 12px; border-radius: 999px 999px 999px 0; background: #2a2a28"></span>
+          <span class="mpin" style="position: absolute; left: 74px; top: 22px; width: 12px; height: 12px; border-radius: 999px 999px 999px 0; background: #2a2a28; transition-delay: .08s"></span>
+          <span class="mpin" style="position: absolute; left: 70px; top: 78px; width: 12px; height: 12px; border-radius: 999px 999px 999px 0; background: #2a2a28; transition-delay: .16s"></span>
+        </span>
+        <span class="aneedle star4" style="{{needle}}"></span>
+        <span class="blip" style="position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px; border-radius: 999px; background: #f4f4f2; border: 3px solid #2a2a28; box-sizing: border-box"></span>
+        <span style="position: absolute; right: 2px; top: 6px; width: 26px; height: 26px; border-radius: 999px; background: #dcdcd8; border: 2px solid #2a2a28; box-sizing: border-box"></span>
+      </span>
+      <span style="position: absolute; left: 50%; top: 210px; transform: translateX(-50%); font-size: 12px; font-weight: 800; background: #2a2a28; color: #f4f4f2; padding: 3px 12px; white-space: nowrap; clip-path: polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%)">Pau · camp de base</span>
+      <span style="position: absolute; left: 50%; top: 236px; transform: translateX(-50%); font-size: 10px; font-weight: 700; background: #f4f4f2; padding: 0 5px; white-space: nowrap">Astrolabe · ouvrir la carte</span>
+    </span>
+  </a>
+
+  <a href="Achievements.dc.html" class="notice" aria-label="Quête en vedette" style="--r: 3deg; --d: .4s; position: absolute; left: 1066px; top: 284px; width: 172px; height: 216px; text-decoration: none; z-index: 10">
+    <span class="torn1" style="position: absolute; inset: 0; background: #f4f4f2; box-sizing: border-box; padding: 24px 14px 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center">
+      <span style="font-size: 20px; font-weight: 800; letter-spacing: .12em; line-height: 1">QUÊTE</span>
+      <span class="ph" style="width: 116px; height: 62px; border: 1.5px solid #2a2a28; flex: none"></span>
+      <span style="font-size: 13px; font-weight: 800; line-height: 1.2">{{slide.title}}</span>
+      <span style="font-size: 10px; color: #5f5f5b; line-height: 1.3">{{slide.meta}}</span>
+      <span style="margin-top: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800">Récompense [X] pts<span style="width: 20px; height: 20px; border-radius: 999px; background: #2a2a28"></span></span>
+    </span>
+    <span class="pin"></span>
+  </a>
+  <a href="#" class="notice" aria-label="Prendre contact" style="--r: -5deg; --d: .55s; position: absolute; left: 1256px; top: 296px; width: 148px; height: 138px; text-decoration: none; z-index: 11">
+    <span class="torn2" style="position: absolute; inset: 0; background: #ecece9; box-sizing: border-box; padding: 24px 12px 12px; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center">
+      <span style="font-size: 17px; font-weight: 800; letter-spacing: .12em; line-height: 1">AVIS</span>
+      <span style="width: 70%; height: 1.5px; background: #2a2a28"></span>
+      <span style="font-size: 13px; font-weight: 800; line-height: 1.2">Prendre contact</span>
+      <span style="font-size: 10px; color: #5f5f5b; line-height: 1.3">Une mission, un poste, une question</span>
+    </span>
+    <span class="pin"></span>
+  </a>
+  <div class="notice" style="--r: 6deg; --d: .7s; position: absolute; left: 1262px; top: 446px; width: 132px; height: 96px; z-index: 10">
+    <span class="torn3" style="position: absolute; inset: 0; background: #dcdcd8; box-sizing: border-box; padding: 22px 10px 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center">
+      <span style="font-size: 13px; font-weight: 800; letter-spacing: .1em; line-height: 1">DISPONIBLE</span>
+      <span style="font-size: 10px; line-height: 1.3">[mission / poste]<br>[à partir de…]</span>
+    </span>
+    <span class="pin"></span>
+  </div>
+
+  <div class="toast" role="status" style="position: absolute; left: 50%; top: 110px; transform: translate(-50%, -260%); background: #2a2a28; color: #f4f4f2; padding: 10px 20px 10px 12px; display: flex; align-items: center; gap: 12px; z-index: 12">
+    <span style="width: 34px; height: 34px; border-radius: 999px; border: 2px solid #f4f4f2; flex: none"></span>
+    <span style="display: flex; flex-direction: column"><span style="font-size: 10px; letter-spacing: .16em">HAUT FAIT DÉBLOQUÉ</span><span style="font-size: 14px; font-weight: 700">Explorateur : premier pas dans le monde</span></span>
+  </div>
+
+  
+
+  <sc-if value="{{opt.open}}" hint-placeholder-val="{{false}}">
+    <section class="optp" aria-label="Options" style="position: absolute; left: 796px; bottom: 204px; width: 300px; box-sizing: border-box; background: #f4f4f2; border: 3px solid #2a2a28; box-shadow: 8px 10px 0 rgba(42,42,40,.35); padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 12px; z-index: 14; font-size: 14px">
+      <span style="position: absolute; right: 36px; bottom: -13px; width: 20px; height: 20px; background: #f4f4f2; border-right: 3px solid #2a2a28; border-bottom: 3px solid #2a2a28; transform: rotate(45deg)"></span>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em">OPTIONS</span>
+        <button type="button" onClick="{{opt.close}}" aria-label="Fermer les options" style="width: 30px; height: 30px; border-radius: 999px; border: 0; background: #2a2a28; color: #f4f4f2; cursor: pointer; font: inherit; font-size: 13px">✕</button>
+      </div>
+      <button type="button" class="lutebtn" onClick="{{lute.toggle}}" aria-pressed="{{lute.pressed}}" aria-label="{{lute.aria}}" style="position: relative; height: 124px; padding: 0 12px 0 96px; border: 2px solid #2a2a28; background: #ecece9; cursor: pointer; font: inherit; color: #2a2a28; text-align: left; display: flex; flex-direction: column; justify-content: center; gap: 4px">
+        <span style="position: absolute; left: 8px; top: 2px; width: 80px; height: 120px; display: block">
+          <span class="lute" style="position: absolute; left: -10px; top: -66px; width: 100px; height: 200px; display: block">
+      <span style="position: absolute; left: 36px; top: 0; width: 26px; height: 30px; box-sizing: border-box; background: #8a8a86; border: 2px solid #2a2a28; transform: rotate(-28deg); transform-origin: 50% 100%"></span>
+      <span style="position: absolute; left: 41px; top: 22px; width: 18px; height: 80px; box-sizing: border-box; background: #a3a39f; border: 2px solid #2a2a28"></span>
+      <span style="position: absolute; left: 0; top: 84px; width: 100px; height: 116px; box-sizing: border-box; background: #ecece9; border: 2px solid #2a2a28; border-radius: 50% 50% 50% 50% / 38% 38% 62% 62%"></span>
+      <span style="position: absolute; left: 36px; top: 112px; width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; background: #8a8a86; border: 2px solid #2a2a28"></span>
+      <span style="position: absolute; left: 32px; top: 168px; width: 36px; height: 6px; background: #2a2a28"></span>
+      <span class="{{lute.strings}}" style="position: absolute; left: 45px; top: 24px; width: 10px; height: 146px; border-left: 1.5px solid #2a2a28; border-right: 1.5px solid #2a2a28; box-sizing: border-box"><span style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1.5px; margin-left: -1px; background: #2a2a28"></span></span>
+    </span>
+          <sc-if value="{{lute.on}}" hint-placeholder-val="{{false}}">
+            <span><span class="note" style="left: 56px; top: 40px; --d: 0s">♪</span><span class="note" style="left: 66px; top: 64px; --d: .8s">♫</span><span class="note" style="left: 46px; top: 26px; --d: 1.6s">♪</span></span>
+          </sc-if>
+        </span>
+        <span style="font-size: 10px; font-weight: 800; letter-spacing: .14em">LUTH DU TROUBADOUR</span>
+        <span style="font-size: 16px; font-weight: 800; line-height: 1.2">{{lute.label}}</span>
+        <span style="font-size: 12px">Pincez les cordes pour lancer ou couper la musique.</span>
+      </button>
+      <sc-for list="{{opt.toggles}}" as="t" hint-placeholder-count="2">
+        <button type="button" role="switch" aria-checked="{{t.checked}}" onClick="{{t.flip}}" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; padding: 0 2px; border: 0; border-top: 1.5px solid #c4c4c0; background: transparent; cursor: pointer; font: inherit; color: #2a2a28; text-align: left">
+          <span style="font-weight: 700">{{t.name}}</span>
+          <span style="{{t.track}}"><span style="{{t.knob}}"></span></span>
+        </button>
+      </sc-for>
+      <span style="font-size: 11px; color: #1f4a8a">Touche O ou clic sur la gemme : ouvrir, fermer</span>
+    </section>
+  </sc-if>
+  <nav aria-label="Barre de sorts PORTFOLIO" class="in-b2" style="position: absolute; left: 354px; bottom: 26px; width: 732px; height: 160px; z-index: 11">
+    <svg width="732" height="160" viewBox="0 0 732 160" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+      <path d="M270 57L306 57M426 57L462 57" stroke="#2a2a28" stroke-width="3"></path>
+      <path d="M288 49l8 8l-8 8l-8-8zM444 49l8 8l-8 8l-8-8z" fill="#2a2a28"></path>
+    </svg>
+    <sc-for list="{{spells}}" as="s" hint-placeholder-count="9">
+      <a href="{{s.href}}" class="cell" onClick="{{s.click}}" aria-label="{{s.label}}, touche {{s.key}}" style="{{s.wrap}}">
+        <span class="tipc"><b style="font-size: 14px">{{s.label}}</b><span style="font-size: 11px; opacity: .8">Sort instantané · touche {{s.key}}</span><span style="font-size: 12px; line-height: 1.4">{{s.desc}}</span></span>
+        <span class="pane" style="{{s.box}}">
+          <span class="s-hex" style="position: absolute; inset: -3px; background: #2a2a28"></span>
+          <svg class="gem" width="{{s.w}}" height="{{s.h}}" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+            <path d="{{s.fa}}" fill="#f4f4f2"></path>
+            <path d="{{s.fb}}" fill="#c4c4c0"></path>
+            <path d="{{s.fc}}" fill="#a3a39f"></path>
+            <path d="{{s.ring}}" fill="none" stroke="#2a2a28" stroke-width="1.2"></path>
+            <path d="{{s.table}}" fill="#ecece9" stroke="#2a2a28" stroke-width="1.5"></path>
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2a2a28" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="{{s.iconStyle}}" aria-hidden="true"><path d="{{s.icon}}"></path></svg>
+          <span class="glint" style="{{s.glint}}"></span>
+          <span style="{{s.keyStyle}}">{{s.key}}</span>
+        </span>
+      </a>
+    </sc-for>
+    <span class="bob" style="position: absolute; left: 400px; top: -40px; font-size: 11px; font-weight: 800; background: #f4f4f2; border: 2px solid #2a2a28; padding: 1px 7px; pointer-events: none">NEW</span>
+    <div style="position: absolute; left: 90px; right: 90px; top: 134px; height: 12px; border: 2px solid #2a2a28; background: #f4f4f2; box-sizing: border-box"><div style="width: 68%; height: 100%; background: #6f6f6b"></div></div>
+    <span style="position: absolute; left: 50%; top: 148px; transform: translateX(-50%); font-size: 10px; font-weight: 800; background: #f4f4f2; padding: 0 6px; white-space: nowrap">Niveau [X] = [X] ans d'expérience</span>
+  </nav>
+
+  <sc-if value="{{hasPanel}}" hint-placeholder-val="{{false}}">
+    <section aria-label="{{panel.title}}" style="{{panelStyle}}">
+      <span style="display: block; height: 18px; margin: 0 -10px; border-radius: 999px; background: #dcdcd8; border: 2px solid #2a2a28"></span>
+      <div style="background: #f4f4f2; border-left: 2px solid #2a2a28; border-right: 2px solid #2a2a28; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em; color: #5f5f5b">PARCHEMIN</span>
+        <span style="font-size: 20px; font-weight: 800; line-height: 1.15">{{panel.title}}</span>
+        <span style="font-size: 14px; line-height: 1.5">{{panel.text}}</span>
+        <button type="button" onClick="{{panel.act}}" style="height: 44px; border: 0; background: #2a2a28; color: #f4f4f2; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer">{{panel.cta}}</button>
+        <button type="button" onClick="{{closePanel}}" style="height: 36px; border: 1.5px solid #2a2a28; background: transparent; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; color: #2a2a28">Renrouler</button>
+      </div>
+      <span style="display: block; height: 18px; margin: 0 -10px; border-radius: 999px; background: #dcdcd8; border: 2px solid #2a2a28"></span>
+    </section>
+  </sc-if>
+
+  <div class="in-r bagwrap" style="position: absolute; right: 24px; bottom: 20px; width: 190px; height: 200px; z-index: 12">
+    <div style="position: absolute; left: 40px; bottom: 70px; width: 110px; height: 90px; box-sizing: border-box; border: 4px solid #2a2a28; border-bottom: 0; border-radius: 55px 55px 0 0"></div>
+    <sc-for list="{{scrolls}}" as="c" hint-placeholder-count="3">
+      <button type="button" class="scroll" onClick="{{c.pick}}" aria-label="{{c.aria}}" aria-expanded="{{c.open}}" style="{{c.style}}">
+        <span style="{{c.roll}}"></span>
+        <span style="position: absolute; left: 4px; right: 4px; top: 4px; height: 11px; border-radius: 999px; border: 1.5px solid #2a2a28; background: #dcdcd8"></span>
+        <span style="position: absolute; left: -2px; right: -2px; top: 46px; height: 8px; background: #2a2a28"></span>
+        <span class="lab" style="position: absolute; left: 50%; top: -26px; transform: translateX(-50%) rotate(calc(var(--r, 0deg) * -1)); font-size: 11px; font-weight: 800; background: #f4f4f2; border: 1.5px solid #2a2a28; padding: 1px 6px; white-space: nowrap">{{c.label}}</span>
+      </button>
+    </sc-for>
+    <div class="bag" style="position: absolute; left: 20px; bottom: 0; width: 150px; height: 98px; box-sizing: border-box; background: #a3a39f; border: 2px solid #2a2a28; border-radius: 16px 16px 36px 36px; pointer-events: none">
+      <div style="position: absolute; left: -2px; right: -2px; top: -2px; height: 40px; box-sizing: border-box; background: #8a8a86; border: 2px solid #2a2a28; border-radius: 16px 16px 30px 30px"></div>
+      <div style="position: absolute; left: 50%; top: 26px; width: 26px; height: 30px; margin-left: -13px; box-sizing: border-box; background: #f4f4f2; border: 2px solid #2a2a28; border-radius: 4px"></div>
+      <span style="position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #2a2a28">BESACE</span>
+    </div>
+  </div>
+
+  
+
+  
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mx: 0, my: 0, line: 0, chars: 0, slide: 0, open: -1, sound: false, opt: false, sfx: true, calm: false };
+    this._tick = 0;
+  }
+  componentDidMount() {
+    var self = this;
+    this._timer = setInterval(function () {
+      self._tick++;
+      var next = {};
+      if (self.state.chars < 120) next.chars = self.state.chars + 1;
+      if (self._tick % 110 === 0) next.slide = (self.state.slide + 1) % 3;
+      if (next.chars !== undefined || next.slide !== undefined) self.setState(next);
+    }, 38);
+  }
+  componentWillUnmount() { clearInterval(this._timer); }
+  renderVals() {
+    var self = this;
+    var lines = [
+      'Te voilà. Je conçois des interfaces, puis je les construis.',
+      'Neuf sorts, un mot : lis les touches de gauche à droite.',
+      'Je travaille près de Pau, sur site ou à distance.',
+      'L’astrolabe suspendu, là-haut, ouvre la carte.'
+    ];
+    var defs = [
+      ['P', 'Personnage', 'Character.dc.html', 'Ma fiche : caractéristiques, profil et équipement.'],
+      ['O', 'Origines', '#', 'D’où je viens : langues, enseignement, puis code et design.'],
+      ['R', 'Réputation', '#', 'Mes clients et ce qu’ils disent de mon travail.'],
+      ['T', 'Talents', 'Talents.dc.html', 'Trois arbres : UI/UX, développement, illustration.'],
+      ['F', 'Faits d’armes', 'Achievements.dc.html', 'Mes projets, du rare au légendaire. L’orbe se remplit avec mon expérience.'],
+      ['O', 'Objectifs', '#', 'Ce que je cherche en ce moment.'],
+      ['L', 'Lettres', '#', 'Écrivez-moi, je réponds vite.'],
+      ['I', 'Inventaire', 'Character.dc.html', 'Mes outils du quotidien, par rareté.'],
+      ['O', 'Options', '#', 'Musique au luth, bruitages, animations.']
+    ];
+    var icons = [
+      'M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7M5 20c0-4 3-6 7-6s7 2 7 6',
+      'M12 21V10M12 10C12 6 9 4 5 4c0 4 3 6 7 6M12 14c0-3 3-5 7-5c0 4-3 5-7 5',
+      'M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z',
+      'M12 21v-7M12 14l-5-5M12 14l5-5M12 11V4M7 9V6M17 9V6',
+      'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5c0 3 1 4 3 4M16 6h3c0 3-1 4-3 4M12 13v4M8 20h8',
+      'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8',
+      'M3 6h18v12H3zM3 7l9 7 9-7',
+      'M6 9h12l1 11H5zM9 9V7a3 3 0 0 1 6 0v2',
+      'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'
+    ];
+    var f1 = function (n) { return n.toFixed(1); };
+    var spells = defs.map(function (d, i) {
+      var big = i === 4, w = big ? 124 : 84, h = big ? 112 : 76;
+      var n = i < 4 ? i : i - 5;
+      var x = big ? 304 : (i < 4 ? 0 : 450) + n * 66, y = big ? -12 : (n % 2 ? 38 : 0);
+      var V = [[w * 0.25, 0], [w * 0.75, 0], [w, h / 2], [w * 0.75, h], [w * 0.25, h], [0, h / 2]];
+      var cx = w / 2, cy = h / 2, k = big ? 0.46 : 0.54;
+      var I = V.map(function (v) { return [cx + (v[0] - cx) * k, cy + (v[1] - cy) * k]; });
+      var pt = function (q) { return f1(q[0]) + ' ' + f1(q[1]); };
+      var fac = ['', '', ''];
+      for (var m = 0; m < 6; m++) {
+        var m2 = (m + 1) % 6;
+        fac[[0, 1, 2, 1, 0, 2][m]] += 'M' + pt(V[m]) + 'L' + pt(V[m2]) + 'L' + pt(I[m2]) + 'L' + pt(I[m]) + 'Z ';
+      }
+      var ring = '';
+      if (big) {
+        var M = V.map(function (v) { return [cx + (v[0] - cx) * 0.74, cy + (v[1] - cy) * 0.74]; });
+        ring = 'M' + M.map(pt).join('L') + 'Z ';
+        for (var q = 0; q < 6; q++) { ring += 'M' + pt(V[q]) + 'L' + pt(I[q]) + ' '; }
+      }
+      var ic = big ? 34 : 24;
+      return { key: d[0], label: d[1], href: d[2], desc: d[3], icon: icons[i], click: i === 8 ? function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ opt: !self.state.opt }); } : function () {}, w: w, h: h,
+        fa: fac[0], fb: fac[1], fc: fac[2], ring: ring, table: 'M' + I.map(pt).join('L') + 'Z',
+        wrap: 'position: absolute; left: ' + x + 'px; top: ' + y + 'px; width: ' + w + 'px; height: ' + h + 'px; display: block; text-decoration: none;',
+        box: '--d: ' + (0.7 + Math.abs(i - 4) * 0.08).toFixed(2) + 's; position: absolute; inset: 0; display: block; clip-path: none;',
+        iconStyle: 'position: absolute; left: ' + f1(cx - ic / 2) + 'px; top: ' + f1(cy - ic / 2) + 'px; width: ' + ic + 'px; height: ' + ic + 'px;',
+        glint: '--g: ' + (i * 0.45).toFixed(2) + 's; left: ' + f1(w * 0.68) + 'px; top: ' + f1(h * 0.1) + 'px;',
+        keyStyle: 'position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); min-width: 20px; padding: 0 4px; box-sizing: border-box; background: #2a2a28; color: #f4f4f2; font-size: ' + (big ? 15 : 12) + 'px; font-weight: 800; line-height: 1.4; text-align: center; border-radius: 4px; box-shadow: 0 0 0 2px #f4f4f2;' };
+    });
+        var slides = [
+      { title: '[Dernier projet]', meta: '[dates]' },
+      { title: 'Bibliothèque SmgComponents', meta: 'Légendaire · UI/UX + Dev' },
+      { title: 'Icône du chatbot Sismo', meta: 'Rare · Illustratrice' }
+    ];
+    var sdefs = [
+      { label: 'Texte', title: 'Version texte', text: 'Tout le portfolio sur une seule page simple, sans jeu ni animation.', cta: 'Ouvrir la version texte', r: -13, left: 52 },
+      { label: 'CV', title: 'Curriculum vitæ', text: '[Résumé en trois lignes : métier, expérience, disponibilité]', cta: 'Télécharger le CV (PDF)', r: 12, left: 108 }
+    ];
+    var snd = this.state.sound;
+    var lute = { on: snd, pressed: String(snd), strings: snd ? 'vib' : '', label: snd ? 'Musique en cours' : 'Jouer la musique',
+      aria: snd ? 'Couper la musique' : 'Jouer la musique', toggle: function () { self.setState({ sound: !snd }); } };
+    var mkT = function (name, k) { var v = !!self.state[k]; var o = {}; o[k] = !v;
+      return { name: name, checked: String(v), flip: function () { self.setState(o); },
+        track: 'position: relative; flex: none; width: 46px; height: 24px; border-radius: 999px; box-sizing: border-box; border: 2px solid #2a2a28; background: ' + (v ? '#2a2a28' : '#dcdcd8') + ';',
+        knob: 'position: absolute; top: 2px; left: ' + (v ? 24 : 2) + 'px; width: 16px; height: 16px; border-radius: 999px; background: ' + (v ? '#f4f4f2' : '#2a2a28') + '; transition: left .2s;' }; };
+    var opt = { open: this.state.opt, close: function () { self.setState({ opt: false }); }, toggles: [mkT('Bruitages', 'sfx'), mkT('Animations réduites', 'calm')] };
+    var op = this.state.open;
+    var scrolls = sdefs.map(function (c, i) {
+      var on = i === op;
+      return { label: c.label, aria: 'Parchemin ' + c.title, open: String(on),
+        pick: function () { self.setState({ open: on ? -1 : i }); },
+        style: '--r: ' + c.r + 'deg; --y: ' + (on ? -32 : 0) + 'px; left: ' + c.left + 'px; bottom: 48px; z-index: 1;',
+        roll: 'position: absolute; inset: 0; border-radius: 15px; border: 2px solid #2a2a28; background: ' + (on ? '#ffffff' : '#ecece9') + ';' };
+    });
+    var pd = op >= 0 ? sdefs[op] : sdefs[0];
+    var panel = { title: pd.title, text: pd.text, cta: pd.cta,
+      act: function () {} };
+    var L = function () { return ''; };
+    return {
+      typed: lines[this.state.line].slice(0, this.state.chars),
+      move: function (e) {
+        var r = e.currentTarget.getBoundingClientRect();
+        self.setState({ mx: ((e.clientX - r.left) / r.width - 0.5) * 2, my: ((e.clientY - r.top) / r.height - 0.5) * 2 });
+      },
+      leave: function () { self.setState({ mx: 0, my: 0 }); },
+      nextLine: function () { self.setState({ line: (self.state.line + 1) % lines.length, chars: 0 }); },
+      compass: 'display: block; width: 400px; height: 26px; box-sizing: border-box; border-top: 2px solid #2a2a28; border-bottom: 2px solid #2a2a28; background-color: rgba(244,244,242,.9); background-image: repeating-linear-gradient(90deg, #2a2a28 0 2px, transparent 2px 20px), repeating-linear-gradient(90deg, #2a2a28 0 4px, transparent 4px 100px); background-size: auto 40%, auto 100%; background-repeat: repeat-x; background-position: ' + (-this.state.mx * 60).toFixed(0) + 'px 100%, ' + (-this.state.mx * 60).toFixed(0) + 'px 0;',
+      opt: opt, lute: lute, scrolls: scrolls, panel: panel, hasPanel: op >= 0, closePanel: function () { self.setState({ open: -1 }); },
+      panelStyle: 'position: absolute; right: 30px; bottom: 236px; width: 280px; z-index: 13; animation: unroll' + Math.max(0, op) + ' .55s cubic-bezier(.2,.8,.2,1);',
+      ring: 'position: absolute; inset: 0; display: block;',
+      needle: 'position: absolute; left: 44px; top: 44px; width: 72px; height: 72px; background: #2a2a28; display: block;',
+      spells: spells, slide: slides[this.state.slide],
+      l1: L(5), l2: L(12), l3: L(20), l4: L(30), l5: L(52)
+    };
+  }
+}
+</script>
+</body>
+</html>

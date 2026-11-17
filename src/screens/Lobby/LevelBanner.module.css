@@ -1,0 +1,75 @@
+.banner {
+  position: absolute !important;
+  left: 28px;
+  top: 24px;
+  z-index: var(--z-hud);
+  display: flex !important;
+  align-items: flex-start;
+  animation: kf-in-left 0.6s var(--ease-out) backwards;
+}
+
+.badge {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 106px;
+  background: var(--c-paper);
+  border: var(--bw) solid var(--c-ink);
+  transform-origin: 50% 0;
+  animation: kf-swing 4s ease-in-out infinite;
+}
+
+.niv {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.1em;
+}
+
+.level {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--r-pill);
+  border: var(--bw-thick) solid var(--c-ink);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+}
+
+.tip {
+  position: absolute;
+  bottom: -11px;
+  width: 20px;
+  height: 20px;
+  background: var(--c-ink);
+  transform: rotate(45deg);
+}
+
+.ribbon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 330px;
+  margin-left: -10px;
+  margin-top: 14px;
+  padding: 10px 40px 10px 24px;
+  background: var(--c-paper);
+}
+
+.name {
+  font-size: 19px;
+  font-weight: var(--fw-black);
+}
+
+.classes {
+  font-size: var(--fs-sm);
+}
+
+.status {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+}

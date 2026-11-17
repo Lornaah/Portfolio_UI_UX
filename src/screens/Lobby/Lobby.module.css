@@ -1,0 +1,6 @@
+.lobby {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--c-scene-sky);
+}

@@ -1,0 +1,165 @@
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--c-bg-map);
+}
+
+.mapWrap {
+  position: absolute;
+  left: 80px;
+  top: 70px;
+  width: 1000px;
+  height: 760px;
+  transform: rotate(-2deg);
+  filter: drop-shadow(12px 14px 0 var(--c-stone-6));
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  background: var(--c-paper);
+  border: var(--bw) solid var(--c-ink);
+}
+
+.paper {
+  position: absolute !important;
+  inset: 18px;
+  opacity: 0.8;
+}
+
+.foldV {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--c-stone-4);
+}
+.foldH {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--c-stone-4);
+}
+
+.title {
+  position: absolute;
+  left: 40px;
+  top: 36px;
+  margin: 0;
+  padding: 2px 12px;
+  background: var(--c-paper);
+  font-size: 34px;
+  font-weight: var(--fw-black);
+}
+
+.rose {
+  position: absolute !important;
+  right: 40px;
+  bottom: 40px;
+  width: 120px;
+  height: 120px;
+  display: grid !important;
+  place-items: center;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+.pins {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zone {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.pin {
+  width: 30px;
+  height: 40px;
+  background: var(--c-stone-4);
+  transition: width var(--dur), height var(--dur);
+}
+.zone[aria-pressed='true'] .pin {
+  width: 40px;
+  height: 52px;
+  background: var(--c-ink);
+}
+.zone:hover .pin {
+  background: var(--c-ink);
+}
+.zoneName {
+  padding: 3px 8px;
+  white-space: nowrap;
+  background: var(--c-paper);
+  border: var(--bw-hair) solid var(--c-ink);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-black);
+}
+
+.card {
+  position: absolute;
+  right: 50px;
+  top: 150px;
+  z-index: 2;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 26px 28px;
+  background: var(--c-paper-2);
+  border: var(--bw-thick) solid var(--c-ink);
+  box-shadow: -10px 12px 0 var(--c-stone-6);
+}
+.cardPin {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+}
+.kicker {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+}
+.cardTitle {
+  margin: 0;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+}
+.text {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+}
+.zoneImg {
+  height: 150px;
+  border: var(--bw) solid var(--c-ink);
+}
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-black);
+  text-decoration: none;
+}

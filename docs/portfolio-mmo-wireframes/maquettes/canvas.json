@@ -1,0 +1,124 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Achievements.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "08 · Faits d'armes [F]",
+      "w": 1440,
+      "x": 4560,
+      "y": 1020
+    },
+    "Character.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "06 · Fiche personnage [P]",
+      "w": 1440,
+      "x": 1520,
+      "y": 1020
+    },
+    "CharacterSelect.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "02 · Sélection du personnage",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "HUD.dc.html": {
+      "h": 1020,
+      "is_interactive": true,
+      "title": "04 · En jeu (lobby)",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "Loading.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "03 · Lancement",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "h": 900,
+      "title": "01 · Révélation (storyboard)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Map.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "07 · Carte",
+      "w": 1440,
+      "x": 3040,
+      "y": 1020
+    },
+    "Talents.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "05 · Talents [T]",
+      "w": 1440,
+      "x": 0,
+      "y": 1020
+    },
+    "BarVariants.dc.html": {
+      "x": 6080,
+      "y": 1020,
+      "w": 1440,
+      "h": 1080,
+      "title": "09 · Barre PORTFOLIO : 3 pistes",
+      "is_interactive": true
+    },
+    "HiveGlass.dc.html": {
+      "x": 6080,
+      "y": 2220,
+      "w": 1440,
+      "h": 1440,
+      "title": "10 · Ruche vitrail : 4 variantes",
+      "is_interactive": true
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-10T12:45:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "flowTitle": {
+      "kind": "title1",
+      "maxW": 6000,
+      "text": "Parcours : de l'ouverture à l'entrée en jeu",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "rule": {
+      "fill": "orange",
+      "text": "Wireframes basse fidélité : structure et contenu seulement. Aucun choix de matière, couleur ou typo ici, ce sera la charte. Les chiffres entre crochets sont à remplir avec du réel.",
+      "w": 360,
+      "x": 6080,
+      "y": 0
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "CharacterSelect.dc.html",
+    "Loading.dc.html",
+    "HUD.dc.html",
+    "Talents.dc.html",
+    "Character.dc.html",
+    "Map.dc.html",
+    "Achievements.dc.html",
+    "BarVariants.dc.html",
+    "HiveGlass.dc.html"
+  ],
+  "pages": [],
+  "title": "Portfolio MMO — wireframes"
+}

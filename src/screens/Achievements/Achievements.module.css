@@ -1,0 +1,300 @@
+.screen {
+  position: absolute !important;
+  inset: 0;
+  overflow: hidden;
+  background: var(--c-bg-trophy);
+}
+
+.header {
+  position: absolute;
+  left: 60px;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kicker {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-paper);
+}
+.title {
+  margin: 0;
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-black);
+  line-height: 1.05;
+}
+
+.counters {
+  position: absolute;
+  left: 470px;
+  top: 38px;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.plaque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 30px;
+  background: var(--c-paper);
+}
+.plaqueValue {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  line-height: 1;
+}
+.plaqueLabel {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+}
+
+.tabs {
+  position: absolute;
+  left: 80px;
+  top: 122px;
+  display: flex;
+  gap: 6px;
+}
+.tab {
+  height: 38px;
+  padding: 0 16px;
+  border: var(--bw) solid var(--c-ink);
+  border-bottom: 0;
+  background: var(--c-paper);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-black);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.tab:hover {
+  transform: translateY(3px);
+}
+.tab[aria-pressed='true'] {
+  background: var(--c-ink);
+  color: var(--c-paper);
+}
+
+.case {
+  position: absolute !important;
+  left: 60px;
+  top: 160px;
+  width: 800px;
+  height: 700px;
+  background: var(--c-ink);
+  border: 14px solid var(--c-ink);
+  box-shadow: inset 0 0 0 2px var(--c-stone-6), 10px 14px 0 rgba(42, 42, 40, 0.35);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+  transition: opacity 0.3s;
+}
+.cell[data-rarity='L'] {
+  background: repeating-linear-gradient(90deg, var(--c-rarity-legendary) 0 14px, var(--c-rarity-legendary-stripe) 14px 16px);
+}
+.cell[data-rarity='E'] { background: var(--c-rarity-epic); }
+.cell[data-rarity='R'] { background: var(--c-rarity-rare); }
+.cell[data-rarity='C'] { background: var(--c-rarity-common); }
+.cell[data-rarity=''] { background: var(--c-rarity-empty); }
+.cell[data-dimmed='true'] {
+  opacity: 0.28;
+}
+.cell[data-selected='true'] {
+  outline: 3px solid var(--c-paper);
+  outline-offset: -6px;
+}
+
+.hook {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  box-shadow: 0 0 0 2px var(--c-paper);
+}
+
+.medal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: 50% 0;
+  animation: kf-hang 0.7s var(--ease-pop) backwards;
+  animation-delay: var(--d, 0s);
+}
+.medal:hover,
+.medal:focus-visible {
+  animation: kf-swing-medal 1s ease-in-out;
+}
+/* la médaille choisie est « décrochée » : il n'en reste qu'une trace */
+.medal[aria-pressed='true'] > :not(.ribbon):not(.ring) {
+  opacity: 0.22;
+}
+
+.ribbon {
+  width: 3px;
+  height: 22px;
+  background: var(--c-ink);
+}
+.ring {
+  width: 16px;
+  height: 16px;
+  margin-top: -3px;
+  border: var(--bw-thick) solid var(--c-ink);
+  border-radius: var(--r-pill);
+}
+.medalArt {
+  position: relative;
+  display: block;
+  margin-top: -3px;
+}
+
+.plate {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  padding: 3px 4px;
+  background: var(--c-paper);
+  border: var(--bw-hair) solid var(--c-ink);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  text-align: center;
+}
+.plate[data-empty='true'] {
+  background: transparent;
+  color: var(--c-stone-1);
+  border: var(--bw-hair) dashed var(--c-stone-1);
+}
+
+.showcase {
+  position: absolute;
+  left: 900px;
+  top: 122px;
+  width: 480px;
+  height: 738px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px;
+  background: var(--c-ink);
+  border: var(--bw-thick) solid var(--c-ink);
+  box-shadow: inset 0 0 0 5px var(--c-ink), inset 0 0 0 7px var(--c-stone-4), 10px 14px 0 rgba(42, 42, 40, 0.35);
+  color: var(--c-paper);
+}
+
+.cushion {
+  position: relative;
+  flex: none;
+  height: 230px;
+  display: grid !important;
+  place-items: center;
+  border-radius: var(--r-xl);
+  background: var(--c-stone-6);
+  box-shadow: inset 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.showcaseLabel {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.14em;
+}
+.bigMedal {
+  display: block;
+}
+
+.certificate {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 22px;
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+.certKicker {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.14em;
+}
+.certTitle {
+  margin: 0;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+  line-height: 1.15;
+}
+.certSub {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+}
+.certRule {
+  height: 1.5px;
+  background: var(--c-ink);
+}
+.criteria {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.criteria li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-base);
+}
+.diamond {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--c-ink);
+  transform: rotate(45deg);
+}
+.awarded {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+}
+.caseStudy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin-top: auto;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: 15px;
+  font-weight: var(--fw-black);
+  text-decoration: none;
+}

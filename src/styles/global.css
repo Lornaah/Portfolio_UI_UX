@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--c-ink);
+  background: var(--c-letterbox);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Focus clavier : toujours visible, jamais masqué par un clip-path
+   (les formes découpées sont portées par des enfants, pas par l'élément focusable). */
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hachure des emplacements d'image (reprise du .ph des maquettes) */
+.hatch {
+  background-color: var(--c-paper-3);
+  background-image:
+    linear-gradient(to top right, transparent calc(50% - 1px), var(--c-hatch) 50%, transparent calc(50% + 1px)),
+    linear-gradient(to bottom right, transparent calc(50% - 1px), var(--c-hatch) 50%, transparent calc(50% + 1px));
+}

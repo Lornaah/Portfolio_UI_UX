@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sélection du personnage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.arch{border-radius:200px 200px 6px 6px}
+.ribbon2{clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%)}
+.torn{clip-path:polygon(0 0,100% 0,100% 94%,94% 97%,88% 93%,81% 98%,74% 94%,66% 99%,58% 94%,50% 98%,42% 93%,34% 97%,26% 93%,18% 98%,10% 94%,4% 97%,0 94%)}
+a{color:#2a2a28}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #d6d6d2">
+  <div class="ph" style="position: absolute; inset: 0; opacity: .45"></div>
+
+  <div style="position: absolute; left: 36px; top: 36px; width: 300px; height: 90px; border: 2px solid #2a2a28; background: #f4f4f2; transform: rotate(-2deg); display: flex; flex-direction: column; justify-content: center; padding: 0 20px; z-index: 6">
+    <span style="font-size: 22px; font-weight: 800; letter-spacing: .04em">JUSTINE HERAULT</span>
+    <span style="font-size: 12px; color: #5f5f5b">Lettrage du nom</span>
+  </div>
+
+  <svg width="1440" height="900" viewBox="0 0 1440 900" style="position: absolute; inset: 0; z-index: 1" aria-hidden="true">
+    <defs><path id="ringText" d="M 620 450 m -332 0 a 332 332 0 1 1 664 0 a 332 332 0 1 1 -664 0"/></defs>
+    <circle cx="620" cy="450" r="372" fill="rgba(244,244,242,.35)" stroke="#2a2a28" stroke-width="2"/>
+    <circle cx="620" cy="450" r="290" fill="none" stroke="#8a8a86" stroke-width="1.5" stroke-dasharray="4 8"/>
+    <g style="{{ringStyle}}">
+      <path d="{{ticks}}" stroke="#2a2a28" stroke-width="2" fill="none"/>
+      <text font-size="15" font-weight="700" letter-spacing="6" fill="#5f5f5b"><textPath href="#ringText">UI/UX DESIGNER · RECHERCHE · PROTOTYPAGE · DÉVELOPPEUSE · JAVA · REACT · ILLUSTRATRICE · LOGOS · ICÔNES ·</textPath></text>
+      <path d="M620 78 L632 96 L620 114 L608 96 Z" fill="#2a2a28"/>
+    </g>
+  </svg>
+
+  <div class="arch" style="position: absolute; left: 475px; top: 200px; width: 290px; height: 500px; background: #bdbdb9; border: 3px solid #2a2a28; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 24px 40px rgba(0,0,0,.22)">
+    <span style="font-size: 13px; background: #f4f4f2; padding: 4px 10px; text-align: center">Justine en pied<br>tenue : {{cur.name}}<br>flotte au centre du cadran</span>
+  </div>
+
+  <sc-for list="{{medals}}" as="m" hint-placeholder-count="3">
+    <button type="button" onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" aria-label="Classe {{m.name}}" style="{{m.style}}">
+      <span style="{{m.disc}}">{{m.short}}</span>
+      <span style="{{m.label}}">{{m.name}}</span>
+    </button>
+  </sc-for>
+
+  <button type="button" onClick="{{prevPick}}" aria-label="Tourner le cadran vers la classe précédente" style="position: absolute; left: 222px; top: 422px; width: 56px; height: 56px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2; font-size: 22px; font-weight: 800; cursor: pointer; z-index: 5">↺</button>
+  <button type="button" onClick="{{nextPick}}" aria-label="Tourner le cadran vers la classe suivante" style="position: absolute; left: 962px; top: 422px; width: 56px; height: 56px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2; font-size: 22px; font-weight: 800; cursor: pointer; z-index: 5">↻</button>
+
+  <div class="ribbon2" style="position: absolute; left: 440px; top: 676px; width: 360px; height: 60px; background: #2a2a28; color: #f4f4f2; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 4">
+    <span style="font-size: 19px; font-weight: 800">Justine</span>
+    <span style="font-size: 12px">{{cur.name}} · Niv. [X]</span>
+  </div>
+
+  <a href="Loading.dc.html" aria-label="Discover : entrer dans le monde" style="position: absolute; left: 550px; top: 752px; width: 140px; height: 140px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; z-index: 5; box-shadow: inset 0 0 0 6px #2a2a28, inset 0 0 0 8px #f4f4f2">
+    <span style="font-size: 14px; font-weight: 800; letter-spacing: .2em">DISCOVER</span>
+    <span style="font-size: 11px">sceau · Entrée</span>
+  </a>
+
+  <section aria-label="Détail de la classe" class="torn" style="position: absolute; left: 1060px; top: 140px; width: 340px; background: #f4f4f2; border-top: 2px solid #2a2a28; transform: rotate(2deg); padding: 34px 26px 54px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; z-index: 4; box-shadow: 0 16px 30px rgba(0,0,0,.2)">
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">CLASSE {{pos}} / 3</span>
+    <span style="font-size: 30px; font-weight: 800; line-height: 1.1">{{cur.name}}</span>
+    <span style="font-size: 17px; line-height: 1.45; font-style: italic">« {{cur.line}} »</span>
+    <span style="font-size: 14px; line-height: 1.55">{{cur.pitch}}</span>
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b; margin-top: 6px">TALENTS PHARES</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px">
+      <sc-for list="{{cur.talents}}" as="t" hint-placeholder-count="3"><span style="font-size: 13px; font-weight: 600; border: 1.5px solid #2a2a28; border-radius: 999px; padding: 3px 10px">{{t}}</span></sc-for>
+    </div>
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b; margin-top: 6px">QUÊTES MISES EN AVANT</span>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <sc-for list="{{cur.quests}}" as="q" hint-placeholder-count="3"><span style="font-size: 14px; display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; background: #2a2a28; transform: rotate(45deg); flex: none"></span>{{q}}</span></sc-for>
+    </div>
+  </section>
+  <span style="position: absolute; left: 1214px; top: 124px; width: 30px; height: 30px; border-radius: 999px; background: #2a2a28; z-index: 5"></span>
+
+  <div style="position: absolute; left: 36px; bottom: 30px; display: flex; gap: 18px; z-index: 6">
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none"><span style="width: 52px; height: 52px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2"></span><span style="font-size: 12px; font-weight: 700">Version texte</span></a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none"><span style="width: 52px; height: 52px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2"></span><span style="font-size: 12px; font-weight: 700">CV</span></a>
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none"><span style="width: 52px; height: 52px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2"></span><span style="font-size: 12px; font-weight: 700">Son</span></a>
+  </div>
+  <span style="position: absolute; right: 40px; bottom: 30px; width: 330px; font-size: 12px; line-height: 1.5; color: #2b5fab; background: #f4f4f2; padding: 6px 10px; z-index: 6">Cadran : clic sur un médaillon, ↺ ↻, ← → ou glisser. Le cadran tourne, le médaillon choisi monte sous l'aiguille, la tenue change, la feuille de détail est remplacée par une nouvelle qui tombe.</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0, turns: 0 }; }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { short: 'UI/UX', name: 'UI/UX Designer', line: 'Observer avant de dessiner.', pitch: 'Recherche utilisateur, ateliers, parcours, maquettes et design system.', talents: ['Observation', 'Prototypage', 'Design system'], quests: ['Refonte « Import grid »', 'Bibliothèque SmgComponents', 'AuTour de mon chien'] },
+      { short: 'DEV', name: 'Développeuse', line: 'Ce que je dessine, je le construis.', pitch: 'Composants Java Swing, sites et apps React, API REST et Spring.', talents: ['Java Swing', 'React', 'API REST'], quests: ['Bibliothèque SmgComponents', 'FIT DISTANCE', 'Ferme Incrémentale'] },
+      { short: 'ILLU', name: 'Illustratrice', line: 'Une image qui dit tout sans un mot.', pitch: 'Logos, chartes graphiques, icônes et illustrations vectorielles pour mes clients.', talents: ['Logo', 'Charte graphique', 'Icônes'], quests: ['Icône du chatbot Sismo', 'Illustration du cube IJK', '[Logo client]'] }
+    ];
+    var i = this.state.i, turns = this.state.turns;
+    var step = function (d) { return function () { self.setState({ i: (i + d + 3) % 3, turns: turns + d }); }; };
+    var pickTo = function (k) { return function () { var d = (k - i + 3) % 3; if (d === 2) d = -1; self.setState({ i: k, turns: turns + d }); }; };
+    var cx = 620, cy = 450, r = 372;
+    var medals = defs.map(function (d, k) {
+      var on = k === i;
+      var rel = ((k - i) % 3 + 3) % 3;
+      var ang = (-90 + rel * 120) * Math.PI / 180;
+      var size = on ? 120 : 86;
+      var x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+      return { short: d.short, name: d.name, pressed: String(on), pick: pickTo(k),
+        style: 'position: absolute; left: ' + (x - 80) + 'px; top: ' + (y - size / 2) + 'px; width: 160px; display: flex; flex-direction: column; align-items: center; gap: 6px; background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit; color: #2a2a28; z-index: 4; transition: left .7s ease, top .7s ease;',
+        disc: 'width: ' + size + 'px; height: ' + size + 'px; border-radius: 999px; display: grid; place-items: center; font-size: ' + (on ? 26 : 18) + 'px; font-weight: 800; border: ' + (on ? '4px solid #2a2a28' : '2px solid #2a2a28') + '; background: ' + (on ? '#2a2a28' : '#f4f4f2') + '; color: ' + (on ? '#f4f4f2' : '#2a2a28') + '; box-shadow: ' + (on ? '0 0 0 8px rgba(244,244,242,.9), 0 0 0 10px #2a2a28' : 'none') + '; transition: all .5s ease;',
+        label: 'font-size: ' + (on ? 14 : 12) + 'px; font-weight: 800; background: #f4f4f2; padding: 2px 8px; display: ' + (on ? 'none' : 'block') + ';' };
+    });
+    var t = '';
+    for (var a = 0; a < 72; a++) {
+      var rad = a * 5 * Math.PI / 180, len = a % 6 === 0 ? 18 : 8;
+      var x1 = cx + 372 * Math.cos(rad), y1 = cy + 372 * Math.sin(rad), x2 = cx + (372 - len) * Math.cos(rad), y2 = cy + (372 - len) * Math.sin(rad);
+      t += 'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' L' + x2.toFixed(1) + ' ' + y2.toFixed(1) + ' ';
+    }
+    return { medals: medals, cur: defs[i], pos: String(i + 1), prevPick: step(-1), nextPick: step(1), ticks: t,
+      ringStyle: 'transform: rotate(' + (-120 * turns) + 'deg); transform-origin: 620px 450px; transition: transform .7s ease;' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Barre de sorts PORTFOLIO, trois pistes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.s-hex{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.s-tile{border-radius:12px}
+.s-window{border-radius:999px 999px 8px 8px}
+.btn{background:transparent;border:0;padding:0;cursor:pointer;font:inherit;color:#2a2a28}
+.sp .spin{transform:rotate(var(--r,0deg));transition:transform .22s cubic-bezier(.3,1.6,.5,1);animation:pop .5s cubic-bezier(.3,1.6,.5,1) backwards;animation-delay:var(--d,0s)}
+.sp:hover{z-index:30}
+.sp:hover .spin{transform:translateY(-10px) rotate(0deg) scale(1.1)}
+.sp:active .spin{transform:rotate(0deg) scale(.94)}
+@keyframes pop{from{opacity:0;transform:translateY(34px) scale(.5)}}
+.tipc{position:absolute;bottom:calc(100% + 16px);left:50%;width:220px;box-sizing:border-box;transform:translate(-50%,8px);opacity:0;pointer-events:none;transition:opacity .15s,transform .2s;background:#2a2a28;color:#f4f4f2;padding:10px 12px;display:flex;flex-direction:column;gap:3px;text-align:left;border-radius:10px 10px 10px 0}
+.sp:hover .tipc{opacity:1;transform:translate(-50%,0)}
+.new{animation:bob 1s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px) rotate(6deg)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1080px; position: relative; background: #d6d6d2; display: flex; flex-direction: column">
+
+  <section style="height: 360px; position: relative; border-bottom: 2px dashed #8a8a86">
+    <div style="position: absolute; left: 48px; top: 24px; width: 250px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em">BARRE 1</span>
+      <span style="font-size: 22px; font-weight: 800; line-height: 1.1">La ruche</span>
+      <span style="font-size: 12px; line-height: 1.45">Neuf sorts hexagonaux emboîtés en zigzag, comme un rayon de miel. Une seule pièce, mais jamais alignée.</span>
+    </div>
+    <sc-for list="{{hive}}" as="s" hint-placeholder-count="9">
+      <button type="button" class="btn sp" aria-label="{{s.label}}, touche {{s.key}}" style="{{s.wrap}}">
+        <span class="tipc"><b style="font-size: 14px">{{s.label}}</b><span style="font-size: 11px; opacity: .8">Sort instantané · touche {{s.key}}</span><span style="font-size: 12px; line-height: 1.4">{{s.desc}}</span></span>
+        <span class="spin" style="{{s.box}}">
+          <span class="s-hex" style="position: absolute; inset: 0; background: #2a2a28"></span>
+          <span class="s-hex" style="position: absolute; inset: 4px; background: #ecece9; display: grid; place-items: center">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2a2a28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"/></svg>
+          </span>
+          <span style="position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); min-width: 22px; height: 22px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; font-size: 13px; font-weight: 800; display: grid; place-items: center">{{s.key}}</span>
+        </span>
+      </button>
+    </sc-for>
+    <div style="position: absolute; left: 414px; top: 300px; width: 612px; height: 10px; border: 2px solid #2a2a28; background: #f4f4f2"><div style="width: 68%; height: 100%; background: #6f6f6b"></div></div>
+  </section>
+
+  <section style="height: 360px; position: relative; border-bottom: 2px dashed #8a8a86">
+    <div style="position: absolute; left: 48px; top: 24px; width: 250px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em">BARRE 2</span>
+      <span style="font-size: 22px; font-weight: 800; line-height: 1.1">L'étagère d'atelier</span>
+      <span style="font-size: 12px; line-height: 1.45">Des tuiles de sorts posées sur une planche, de tailles différentes selon leur importance, chacune un peu de travers.</span>
+    </div>
+    <div style="position: absolute; left: 330px; top: 286px; width: 780px; height: 12px; background: #2a2a28"></div>
+    <div style="position: absolute; left: 360px; top: 298px; width: 14px; height: 30px; background: #2a2a28"></div>
+    <div style="position: absolute; left: 1066px; top: 298px; width: 14px; height: 30px; background: #2a2a28"></div>
+    <div style="position: absolute; left: 392px; top: 306px; width: 656px; height: 8px; border: 2px solid #2a2a28; background: #f4f4f2"><div style="width: 68%; height: 100%; background: #6f6f6b"></div></div>
+    <sc-for list="{{shelf}}" as="s" hint-placeholder-count="9">
+      <button type="button" class="btn sp" aria-label="{{s.label}}, touche {{s.key}}" style="{{s.wrap}}">
+        <span class="tipc"><b style="font-size: 14px">{{s.label}}</b><span style="font-size: 11px; opacity: .8">Sort instantané · touche {{s.key}}</span><span style="font-size: 12px; line-height: 1.4">{{s.desc}}</span></span>
+        <span class="spin" style="{{s.box}}">
+          <span class="s-tile" style="position: absolute; inset: 0; background: #2a2a28"></span>
+          <span class="s-tile" style="position: absolute; inset: 3px; background: #ecece9; box-shadow: inset 0 0 0 3px #ecece9, inset 0 0 0 4.5px #8a8a86; display: grid; place-items: center">
+            <svg width="{{s.ic}}" height="{{s.ic}}" viewBox="0 0 24 24" fill="none" stroke="#2a2a28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"/></svg>
+          </span>
+          <span style="position: absolute; left: -7px; top: -7px; min-width: 24px; height: 24px; background: #2a2a28; color: #f4f4f2; font-size: 14px; font-weight: 800; display: grid; place-items: center; transform: rotate(-6deg)">{{s.key}}</span>
+        </span>
+      </button>
+    </sc-for>
+    <span class="new" style="position: absolute; left: 742px; top: 150px; font-size: 12px; font-weight: 800; background: #2a2a28; color: #f4f4f2; padding: 2px 8px">NEW</span>
+  </section>
+
+  <section style="height: 360px; position: relative">
+    <div style="position: absolute; left: 48px; top: 24px; width: 250px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: .16em">BARRE 3</span>
+      <span style="font-size: 22px; font-weight: 800; line-height: 1.1">Les vitraux</span>
+      <span style="font-size: 12px; line-height: 1.45">Des sorts en forme de fenêtres d'abbaye, en deux groupes : PORT (qui je suis) et FOLIO (ce que je fais), autour d'un médaillon de niveau.</span>
+    </div>
+    <div style="position: absolute; left: 315px; top: 292px; width: 810px; height: 14px; background: #2a2a28; border-radius: 0 0 14px 14px"></div>
+    <div style="position: absolute; left: 395px; top: 312px; width: 650px; height: 8px; border: 2px solid #2a2a28; background: #f4f4f2"><div style="width: 68%; height: 100%; background: #6f6f6b"></div></div>
+    <sc-for list="{{glass}}" as="s" hint-placeholder-count="9">
+      <button type="button" class="btn sp" aria-label="{{s.label}}, touche {{s.key}}" style="{{s.wrap}}">
+        <span class="tipc"><b style="font-size: 14px">{{s.label}}</b><span style="font-size: 11px; opacity: .8">Sort instantané · touche {{s.key}}</span><span style="font-size: 12px; line-height: 1.4">{{s.desc}}</span></span>
+        <span class="spin" style="{{s.box}}">
+          <span class="s-window" style="position: absolute; inset: 0; background: #2a2a28"></span>
+          <span class="s-window" style="position: absolute; inset: 3px; background: #ecece9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2a2a28" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"/></svg>
+            <span style="width: 60%; height: 1.5px; background: #8a8a86"></span>
+            <span style="font-size: 15px; font-weight: 800; line-height: 1">{{s.key}}</span>
+          </span>
+        </span>
+      </button>
+    </sc-for>
+    <div style="position: absolute; left: 631px; top: 186px; width: 96px; height: 96px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #d6d6d2, 0 0 0 6px #2a2a28">
+      <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em">NIV.</span>
+      <span style="font-size: 26px; font-weight: 800; line-height: 1">[X]</span>
+    </div>
+    <span style="position: absolute; left: 335px; top: 176px; font-size: 11px; font-weight: 800; letter-spacing: .3em">PORT</span>
+    <span style="position: absolute; left: 1052px; top: 176px; font-size: 11px; font-weight: 800; letter-spacing: .3em">FOLIO</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var defs = [
+      ['P', 'Personnage', 'Ma fiche : caractéristiques, profil, équipement.', 'M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7M5 20c0-4 3-6 7-6s7 2 7 6'],
+      ['O', 'Origines', 'D’où je viens : langues, enseignement, code.', 'M12 21V10M12 10C12 6 9 4 5 4c0 4 3 6 7 6M12 14c0-3 3-5 7-5c0 4-3 5-7 5'],
+      ['R', 'Réputation', 'Mes clients et ce qu’ils disent.', 'M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z'],
+      ['T', 'Talents', 'Trois arbres : UI/UX, dev, illustration.', 'M12 21v-7M12 14l-5-5M12 14l5-5M12 11V4M7 9V6M17 9V6'],
+      ['F', 'Faits d’armes', 'Mes projets, du rare au légendaire.', 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5c0 3 1 4 3 4M16 6h3c0 3-1 4-3 4M12 13v4M8 20h8'],
+      ['O', 'Objectifs', 'Ce que je cherche en ce moment.', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8'],
+      ['L', 'Lettres', 'Écrivez-moi, je réponds vite.', 'M3 6h18v12H3zM3 7l9 7 9-7'],
+      ['I', 'Inventaire', 'Mes outils du quotidien.', 'M6 9h12l1 11H5zM9 9V7a3 3 0 0 1 6 0v2'],
+      ['O', 'Options', 'Son, version texte, CV.', 'M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2']
+    ];
+    var base = function (d) { return { key: d[0], label: d[1], desc: d[2], icon: d[3] }; };
+
+    var hive = defs.map(function (d, i) {
+      var s = base(d);
+      s.wrap = 'position: absolute; left: ' + (414 + i * 66) + 'px; top: ' + (i % 2 ? 196 : 158) + 'px; width: 84px; height: 76px;';
+      s.box = '--d: ' + (i * 0.06).toFixed(2) + 's; position: absolute; inset: 0; display: block;';
+      return s;
+    });
+
+    var sizes = [92, 60, 60, 92, 112, 60, 60, 60, 60], rots = [-3, 3, -2, 2, 0, -3, 2, -2, 3];
+    var x = 352, shelf = defs.map(function (d, i) {
+      var s = base(d), z = sizes[i], left = x; x += z + 10;
+      s.wrap = 'position: absolute; left: ' + left + 'px; top: ' + (286 - z - 2) + 'px; width: ' + z + 'px; height: ' + z + 'px;';
+      s.box = '--r: ' + rots[i] + 'deg; --d: ' + (i * 0.06).toFixed(2) + 's; position: absolute; inset: 0; display: block; transform-origin: 50% 100%;';
+      s.ic = Math.round(z * 0.48);
+      return s;
+    });
+
+    var hs = [92, 78, 78, 92, 112, 78, 78, 78, 92];
+    var gx = 335, glass = defs.map(function (d, i) {
+      var s = base(d), h = hs[i], left = gx;
+      gx += 64 + 8; if (i === 3) gx += 16 + 96 + 16;
+      s.wrap = 'position: absolute; left: ' + left + 'px; top: ' + (292 - h) + 'px; width: 64px; height: ' + h + 'px;';
+      s.box = '--d: ' + (i * 0.06).toFixed(2) + 's; position: absolute; inset: 0; display: block; transform-origin: 50% 100%;';
+      return s;
+    });
+    return { hive: hive, shelf: shelf, glass: glass };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.close {
+  position: absolute;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: 22px;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-spring);
+}
+.close:hover {
+  transform: rotate(90deg);
+}

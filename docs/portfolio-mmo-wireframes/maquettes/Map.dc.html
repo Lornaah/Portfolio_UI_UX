@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Carte du monde</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.pin{clip-path:polygon(50% 100%,0 40%,0 0,100% 0,100% 40%)}
+a{color:#2a2a28}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #a9a9a5">
+  <div style="position: absolute; left: 80px; top: 70px; width: 1000px; height: 760px; transform: rotate(-2deg); background: #f4f4f2; border: 2px solid #2a2a28; box-shadow: 12px 14px 0 #6f6f6b">
+    <div class="ph" style="position: absolute; inset: 18px; opacity: .8"></div>
+    <div style="position: absolute; top: 0; bottom: 0; left: 33.3%; width: 2px; background: #8a8a86"></div>
+    <div style="position: absolute; top: 0; bottom: 0; left: 66.6%; width: 2px; background: #8a8a86"></div>
+    <div style="position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #8a8a86"></div>
+    <span style="position: absolute; left: 40px; top: 36px; font-size: 34px; font-weight: 800; background: #f4f4f2; padding: 2px 12px">Carte du monde</span>
+    <div style="position: absolute; right: 40px; bottom: 40px; width: 120px; height: 120px; border-radius: 999px; border: 2px solid #2a2a28; background: #f4f4f2; display: grid; place-items: center; font-size: 12px; font-weight: 700">Rose des vents</div>
+    <sc-for list="{{zones}}" as="z" hint-placeholder-count="4">
+      <button type="button" onClick="{{z.pick}}" aria-label="{{z.name}}" style="{{z.pos}}">
+        <span class="pin" style="{{z.pin}}"></span>
+        <span style="font-size: 13px; font-weight: 800; background: #f4f4f2; border: 1.5px solid #2a2a28; padding: 3px 8px; white-space: nowrap">{{z.name}}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="position: absolute; right: 50px; top: 150px; width: 380px; background: #ecece9; border: 3px solid #2a2a28; transform: rotate(3deg); padding: 26px 26px 28px; display: flex; flex-direction: column; gap: 12px; z-index: 2; box-shadow: -10px 12px 0 #6f6f6b">
+    <span style="position: absolute; top: -14px; left: 50%; width: 26px; height: 26px; margin-left: -13px; border-radius: 999px; background: #2a2a28"></span>
+    <span style="font-size: 11px; letter-spacing: .16em">ZONE</span>
+    <span style="font-size: 26px; font-weight: 800">{{cur.name}}</span>
+    <span style="font-size: 14px; line-height: 1.5">{{cur.desc}}</span>
+    <div class="ph" style="height: 150px; border: 2px solid #2a2a28"></div>
+    <span style="font-size: 11px; letter-spacing: .16em">QUÊTES DE LA ZONE</span>
+    <span style="font-size: 14px; line-height: 1.6">{{cur.quests}}</span>
+    <a href="Achievements.dc.html" style="height: 48px; background: #2a2a28; color: #f4f4f2; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; text-decoration: none">Voir les faits d'armes</a>
+  </div>
+
+  <span style="position: absolute; left: 90px; bottom: 22px; font-size: 12px; color: #1f4a8a; background: #f4f4f2; padding: 3px 8px">La carte se déplie pli par pli à l'ouverture · les épingles tombent ensuite</span>
+  <a href="HUD.dc.html" aria-label="Fermer" style="position: absolute; right: 36px; top: 36px; width: 64px; height: 64px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: grid; place-items: center; font-size: 22px; text-decoration: none; z-index: 3">✕</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { z: 'base' }; }
+  renderVals() {
+    var self = this;
+    var defs = [
+      { id: 'base', name: 'Pau · camp de base', x: 420, y: 470, desc: 'Où je vis et travaille. Sur site ou à distance.', quests: '[Disponibilités, zone d’intervention]' },
+      { id: 'industrie', name: 'La Citadelle · logiciel métier', x: 200, y: 200, desc: '[Client grand compte, secteur énergie] : application desktop de géoscience. UX et dev.', quests: 'SmgComponents · Import grid · Layer management' },
+      { id: 'clients', name: 'Le Bourg marchand · clients', x: 640, y: 230, desc: 'Sites et applications pour des indépendants et petites structures.', quests: 'AuTour de mon chien · FIT DISTANCE · Quiz chronométré' },
+      { id: 'tour', name: 'La Tour · projets perso', x: 640, y: 560, desc: 'Expérimentations, jeux, compétitions de code.', quests: 'Ferme Incrémentale · bots CodinGame' }
+    ];
+    var zones = defs.map(function (d) {
+      var on = d.id === self.state.z;
+      return { name: d.name, pick: function () { self.setState({ z: d.id }); },
+        pos: 'position: absolute; left: ' + d.x + 'px; top: ' + d.y + 'px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit; color: #2a2a28;',
+        pin: 'width: ' + (on ? 40 : 30) + 'px; height: ' + (on ? 52 : 40) + 'px; background: ' + (on ? '#2a2a28' : '#8a8a86') + ';' };
+    });
+    var cur = defs.filter(function (d) { return d.id === self.state.z; })[0];
+    return { zones: zones, cur: cur };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+.box {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: var(--z-hud);
+  width: 310px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--fs-lg);
+}
+
+.name {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-left: 16px;
+  padding: 5px 28px;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.14em;
+}
+
+.body {
+  position: relative;
+  display: block;
+  min-height: 108px;
+  margin-top: -8px;
+  padding: 20px 20px 16px;
+  background: rgba(244, 244, 242, 0.94);
+  border-top: var(--bw-thick) solid var(--c-ink);
+  border-bottom: var(--bw-hair) solid var(--c-ink);
+}
+
+.text {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  font-weight: var(--fw-medium);
+}
+
+.caret {
+  animation: kf-blink 0.8s steps(1) infinite;
+}
+
+.more {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  animation: kf-bounce 1s ease-in-out infinite;
+}

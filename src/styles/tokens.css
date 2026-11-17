@@ -1,0 +1,119 @@
+/*
+ * Design tokens — wireframe gris.
+ * Toutes les valeurs visuelles passent par ici : pour brancher la charte,
+ * il suffit de remplacer ces variables (aucune couleur en dur dans les composants).
+ */
+:root {
+  /* ── Couleurs de base ─────────────────────────────── */
+  --c-ink: #2a2a28;          /* trait, texte principal, aplats sombres */
+  --c-ink-soft: #5f5f5b;     /* texte secondaire */
+  --c-paper: #f4f4f2;        /* papier clair, fonds de cartes */
+  --c-paper-2: #ecece9;      /* papier secondaire */
+  --c-paper-3: #e3e3e0;      /* fond des emplacements d'image */
+  --c-stone-1: #dcdcd8;
+  --c-stone-2: #c4c4c0;
+  --c-stone-3: #a3a39f;
+  --c-stone-4: #8a8a86;
+  --c-stone-5: #7d7d79;
+  --c-stone-6: #6f6f6b;
+  --c-hatch: #b5b5b0;        /* hachures des emplacements d'image */
+  --c-light: #ffffff;        /* reflets, éclats */
+  --c-focus: #1d5fd1;        /* anneau de focus clavier */
+  --c-letterbox: #1d1d1b;    /* bandes autour de la scène 1440×900 */
+
+  /* ── Scène du lobby (calques) ─────────────────────── */
+  --c-scene-sky: #dededa;
+  --c-scene-moon-border: #c4c4c0;
+  --c-scene-mountains: #cdcdc9;
+  --c-scene-hills: #bcbcb8;
+  --c-scene-ground: #aaaaa6;
+  --c-scene-hero: #8f8f8b;
+  --c-scene-foreground: #7d7d79;
+
+  /* ── Fonds d'écran ────────────────────────────────── */
+  --c-bg-reveal: #f4f4f2;
+  --c-bg-select: #d6d6d2;
+  --c-bg-grimoire: #b9b9b5;
+  --c-bg-map: #a9a9a5;
+  --c-bg-trophy: #8a8a86;
+
+  /* ── Rareté (velours de la vitrine, étiquettes) ───── */
+  --c-rarity-legendary: #dcdcd8;
+  --c-rarity-legendary-stripe: #cfcfcb;
+  --c-rarity-epic: #a3a39f;
+  --c-rarity-rare: #7d7d79;
+  --c-rarity-common: #6a6a66;
+  --c-rarity-empty: #5f5f5b;
+
+  /* ── Facettes des gemmes ──────────────────────────── */
+  --c-gem-facet-a: #f4f4f2;
+  --c-gem-facet-b: #c4c4c0;
+  --c-gem-facet-c: #a3a39f;
+  --c-gem-table: #ecece9;
+  --c-gem-mount: #2a2a28;
+
+  /* ── Typographie ──────────────────────────────────── */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;   /* titres, lettrages */
+  --font-ui: 'Inter', system-ui, sans-serif;        /* touches, étiquettes */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+  --fs-2xs: 10px;
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-md: 13px;
+  --fs-base: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 26px;
+  --fs-3xl: 30px;
+  --fs-4xl: 38px;
+  --ls-caps: 0.16em;
+  --ls-wide: 0.12em;
+
+  /* ── Rayons ───────────────────────────────────────── */
+  --r-xs: 3px;
+  --r-sm: 4px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 40px;
+  --r-pill: 999px;
+  --r-arch: 200px 200px 6px 6px;
+
+  /* ── Traits ───────────────────────────────────────── */
+  --bw-hair: 1.5px;
+  --bw: 2px;
+  --bw-thick: 3px;
+  --bw-heavy: 4px;
+
+  /* ── Ombres ───────────────────────────────────────── */
+  --sh-soft: 0 16px 30px rgba(0, 0, 0, 0.2);
+  --sh-lifted: 0 24px 40px rgba(0, 0, 0, 0.3);
+  --sh-hard: 8px 10px 0 var(--c-stone-4);
+  --sh-hard-left: -8px 10px 0 var(--c-stone-4);
+  --sh-hard-ink: 8px 10px 0 rgba(42, 42, 40, 0.35);
+  --sh-drop-paper: drop-shadow(3px 5px 0 rgba(42, 42, 40, 0.35));
+  --sh-drop-paper-hover: drop-shadow(6px 12px 0 rgba(42, 42, 40, 0.35));
+
+  /* ── Mouvement ────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.3, 1.6, 0.5, 1);
+  --ease-pop: cubic-bezier(0.3, 1.4, 0.5, 1);
+  --dur-fast: 0.15s;
+  --dur: 0.25s;
+  --dur-slow: 0.6s;
+
+  /* ── Profondeur ───────────────────────────────────── */
+  --z-scene: 1;
+  --z-hud: 10;
+  --z-toast: 12;
+  --z-popover: 14;
+  --z-overlay: 20;
+
+  /* ── Scène ────────────────────────────────────────── */
+  --stage-w: 1440px;
+  --stage-h: 900px;
+}

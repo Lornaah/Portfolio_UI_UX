@@ -1,0 +1,70 @@
+.parchment {
+  position: absolute;
+  z-index: 13;
+  width: 280px;
+}
+.parchment:focus {
+  outline: none;
+}
+
+.roller {
+  display: block;
+  height: 18px;
+  margin: 0 -10px;
+  border-radius: var(--r-pill);
+  background: var(--c-stone-1);
+  border: var(--bw) solid var(--c-ink);
+}
+
+.sheet {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--c-paper);
+  border-left: var(--bw) solid var(--c-ink);
+  border-right: var(--bw) solid var(--c-ink);
+}
+
+.kicker {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-ink-soft);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  line-height: 1.15;
+}
+
+.text {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border: 0;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-black);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.secondary {
+  height: 36px;
+  border: var(--bw-hair) solid var(--c-ink);
+  background: transparent;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}

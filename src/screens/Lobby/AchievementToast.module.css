@@ -1,0 +1,40 @@
+.region {
+  position: absolute;
+  left: 50%;
+  top: 110px;
+  z-index: var(--z-toast);
+  transform: translateX(-50%);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px 10px 12px;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  white-space: nowrap;
+}
+
+.icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-paper);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.kicker {
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--ls-caps);
+}
+
+.title {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+}

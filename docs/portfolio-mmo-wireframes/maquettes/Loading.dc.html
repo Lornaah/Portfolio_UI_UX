@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Lancement</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+a{color:#2a2a28}a:hover{color:#000}
+</style>
+</helmet>
+<div class="ph" style="width: 1440px; height: 900px; position: relative; overflow: hidden">
+  <div style="position: absolute; left: 50%; top: 60px; transform: translateX(-50%); background: #f4f4f2; border: 1.5px solid #9a9a96; padding: 12px 28px; display: flex; flex-direction: column; align-items: center; gap: 4px">
+    <span style="font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #5f5f5b">Écran de chargement</span>
+    <span style="font-size: 24px; font-weight: 700">Illustration de la zone de départ</span>
+  </div>
+  <div style="position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); width: 720px; background: #f4f4f2; border: 1.5px solid #9a9a96; padding: 14px 20px; text-align: center; font-size: 15px; line-height: 1.5">
+    Astuce : vos raccourcis épellent <b>P O R T F O L I O</b>. <b>T</b> pour les talents, <b>P</b> pour la fiche personnage, <b>F</b> pour les faits d'armes.
+  </div>
+  <div style="position: absolute; left: 50%; bottom: 80px; transform: translateX(-50%); width: 720px; display: flex; flex-direction: column; gap: 8px">
+    <div style="height: 20px; border: 1.5px solid #6f6f6b; background: #f4f4f2; padding: 3px; box-sizing: border-box">
+      <div style="width: 64%; height: 100%; background: #2a2a28"></div>
+    </div>
+    <span style="font-size: 13px; text-align: center; background: #f4f4f2; align-self: center; padding: 2px 10px">Chargement du monde… 64 %</span>
+  </div>
+  <a href="HUD.dc.html" style="position: absolute; right: 32px; bottom: 32px; height: 44px; padding: 0 18px; border: 1.5px solid #9a9a96; background: #f4f4f2; display: flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: none">Entrer en jeu →</a>
+  <div style="position: absolute; left: 32px; top: 32px; width: 300px; padding: 12px 16px; border: 1.5px dashed #2b5fab; background: #f4f4f2; font-size: 13px; line-height: 1.5; color: #2b5fab">1,5 à 2 s maximum, le temps de précharger les fenêtres. Le portrait de la classe choisie zoome puis disparaît vers le cadre d'unité du HUD.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/*
+ * Animations d'ambiance (boucles CSS). Aucune ne dépend de la position de la souris.
+ * Elles sont toutes coupées quand <html data-reduced-motion="true">, posé à la fois
+ * par prefers-reduced-motion et par l'option « Animations réduites ».
+ */
+@keyframes kf-pop { from { opacity: 0; transform: translateY(40px) scale(0.4); } }
+@keyframes kf-in-left { from { opacity: 0; transform: translateX(-80px); } }
+@keyframes kf-in-right { from { opacity: 0; transform: translateX(80px); } }
+@keyframes kf-in-bottom { from { opacity: 0; transform: translateY(120px); } }
+@keyframes kf-drop-top { from { transform: translateY(-260px); } }
+@keyframes kf-breathe { 50% { transform: scale(1.012); } }
+@keyframes kf-rise { 15% { opacity: 0.9; } to { transform: translate(40px, -300px); opacity: 0; } }
+@keyframes kf-drift { from { transform: translateX(-200px); } to { transform: translateX(1700px); } }
+@keyframes kf-swing { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(-1deg); } }
+@keyframes kf-pendulum { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+@keyframes kf-blink { 50% { opacity: 0; } }
+@keyframes kf-bounce { 50% { transform: translateY(5px); } }
+@keyframes kf-bob { 50% { transform: translateY(-5px) rotate(6deg); } }
+@keyframes kf-glint { 0%, 70%, 100% { transform: scale(0) rotate(0deg); } 80% { transform: scale(1.3) rotate(45deg); } 90% { transform: scale(0) rotate(90deg); } }
+@keyframes kf-spin { to { transform: rotate(360deg); } }
+@keyframes kf-wobble { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(16deg); } }
+@keyframes kf-blip { from { box-shadow: 0 0 0 0 rgba(42, 42, 40, 0.6); } to { box-shadow: 0 0 0 14px rgba(42, 42, 40, 0); } }
+@keyframes kf-vibrate { 50% { transform: translateX(1.5px); } }
+@keyframes kf-note { 10% { opacity: 1; } to { transform: translate(26px, -90px) rotate(18deg); opacity: 0; } }
+@keyframes kf-unroll { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes kf-pin-in { from { opacity: 0; transform: rotate(calc(var(--r, 0deg) + 14deg)) translateY(-40px); } }
+@keyframes kf-hang { from { opacity: 0; transform: translateY(-40px) rotate(14deg); } }
+@keyframes kf-swing-medal { 20% { transform: rotate(9deg); } 50% { transform: rotate(-7deg); } 80% { transform: rotate(3deg); } }
+
+/* Éclat (reflet animé sur les gemmes et médailles) */
+.glint {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--c-light);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  transform: scale(0);
+  animation: kf-glint 4s ease-in-out infinite;
+  animation-delay: var(--g, 0s);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-reduced-motion='true'] *,
+:root[data-reduced-motion='true'] *::before,
+:root[data-reduced-motion='true'] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

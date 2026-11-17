@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fiche personnage</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.arch{border-radius:200px 200px 6px 6px}
+.tag{clip-path:polygon(14% 0,100% 0,100% 100%,14% 100%,0 50%)}
+a{color:#2a2a28}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #b9b9b5">
+  <div class="ph" style="position: absolute; inset: 0; opacity: .35"></div>
+
+  <div style="position: absolute; left: 50%; top: 470px; width: 640px; height: 640px; margin-left: -320px; margin-top: -320px; border-radius: 999px; border: 2px dashed #2a2a28"></div>
+  <div style="position: absolute; left: 50%; top: 470px; width: 500px; height: 500px; margin-left: -250px; margin-top: -250px; border-radius: 999px; border: 1.5px solid #8a8a86"></div>
+  <div class="arch" style="position: absolute; left: 50%; top: 170px; width: 260px; height: 600px; margin-left: -130px; background: #c9c9c5; border: 2px solid #8a8a86; display: flex; align-items: center; justify-content: center">
+    <span style="font-size: 12px; background: #f4f4f2; padding: 4px 10px; text-align: center">Personnage en pied<br>glisser pour tourner</span>
+  </div>
+  <div style="position: absolute; left: 50%; top: 770px; width: 360px; height: 46px; margin-left: -180px; border-radius: 999px; background: #8a8a86; opacity: .6"></div>
+
+  <sc-for list="{{slots}}" as="s" hint-placeholder-count="10">
+    <button type="button" onClick="{{s.pick}}" aria-label="{{s.slot}} : {{s.tool}}" style="{{s.pos}}">
+      <span style="{{s.gem}}"><span style="transform: rotate(-45deg); font-size: 10px; font-weight: 800">{{s.abbr}}</span></span>
+    </button>
+  </sc-for>
+
+  <div style="position: absolute; left: 50%; top: 52px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px">
+    <span style="font-size: 30px; font-weight: 800">Justine Herault</span>
+    <span style="font-size: 14px">UI/UX designer, développeuse, illustratrice · Niveau [X]</span>
+  </div>
+
+  <div style="position: absolute; left: 36px; top: 150px; width: 300px; background: #f4f4f2; border: 2px solid #2a2a28; transform: rotate(-3deg); padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; box-shadow: 8px 10px 0 #8a8a86">
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">CARACTÉRISTIQUES</span>
+    <sc-for list="{{stats}}" as="st" hint-placeholder-count="5">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <span style="width: 34px; height: 34px; border-radius: 999px; border: 2px solid #2a2a28; display: grid; place-items: center; font-size: 13px; font-weight: 800; flex: none">{{st.v}}</span>
+        <span style="font-size: 14px">{{st.k}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="position: absolute; left: 50px; top: 560px; width: 290px; background: #ecece9; border: 2px solid #2a2a28; transform: rotate(2deg); padding: 18px 22px; display: flex; flex-direction: column; gap: 6px">
+    <span style="position: absolute; top: -12px; left: 50%; width: 22px; height: 22px; margin-left: -11px; border-radius: 999px; background: #2a2a28"></span>
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">PROFIL</span>
+    <span style="font-size: 14px"><b>Base</b> · Pau</span>
+    <span style="font-size: 14px"><b>Statut</b> · [Freelance / disponible]</span>
+    <span style="font-size: 14px"><b>Langues</b> · [FR, EN, …]</span>
+    <span style="font-size: 14px"><b>Formation</b> · [Langues et traduction]</span>
+  </div>
+
+  <div style="position: absolute; right: 36px; top: 150px; width: 320px; background: #f4f4f2; border: 2px solid #2a2a28; transform: rotate(2.5deg); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: -8px 10px 0 #8a8a86">
+    <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">{{cur.slot}}</span>
+    <span style="font-size: 26px; font-weight: 800">{{cur.tool}}</span>
+    <span style="align-self: flex-start; font-size: 12px; font-weight: 700; border: 1.5px solid #2a2a28; padding: 2px 8px">{{cur.rarity}}</span>
+    <span style="font-size: 14px; line-height: 1.5">[À quoi il me sert, depuis quand, sur quels projets]</span>
+    <span style="font-size: 12px; color: #2b5fab">Clic sur une gemme : la fiche de l'objet se pose ici, comme une carte posée sur la table</span>
+  </div>
+
+  <nav aria-label="Onglets" style="position: absolute; right: 0; top: 560px; display: flex; flex-direction: column; gap: 10px; align-items: flex-end">
+    <a href="#" class="tag" style="width: 230px; height: 52px; background: #2a2a28; color: #f4f4f2; display: flex; align-items: center; padding-left: 50px; font-size: 15px; font-weight: 800; text-decoration: none">Personnage</a>
+    <a href="#" class="tag" style="width: 200px; height: 52px; background: #f4f4f2; display: flex; align-items: center; padding-left: 44px; font-size: 15px; font-weight: 700; text-decoration: none">Réputation</a>
+    <a href="#" class="tag" style="width: 200px; height: 52px; background: #f4f4f2; display: flex; align-items: center; padding-left: 44px; font-size: 15px; font-weight: 700; text-decoration: none">Métiers</a>
+  </nav>
+
+  <a href="HUD.dc.html" aria-label="Fermer" style="position: absolute; right: 36px; top: 36px; width: 64px; height: 64px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: grid; place-items: center; font-size: 22px; text-decoration: none">✕</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 0 }; }
+  renderVals() {
+    var self = this;
+    var defs = [
+      ['Arme principale', 'Figma', 'FIG', 'Légendaire'],
+      ['Main gauche', '[IDE Java]', 'IDE', 'Épique'],
+      ['Tête', '[outil de recherche]', 'REC', 'Rare'],
+      ['Torse', '[outil d’illustration]', 'ILL', 'Épique'],
+      ['Mains', '[outil de proto]', 'PRO', 'Rare'],
+      ['Bijou', '[outil IA]', 'IA', 'Épique'],
+      ['Anneau', 'React', 'RCT', 'Épique'],
+      ['Anneau', 'Spring', 'SPR', 'Rare'],
+      ['Cape', 'Godot', 'GDT', 'Rare'],
+      ['Monture', '[outil favori]', '???', 'Légendaire']
+    ];
+    var cx = 720, cy = 470, r = 320;
+    var slots = defs.map(function (d, i) {
+      var a = (-90 + i * 36) * Math.PI / 180;
+      var x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      var on = i === self.state.sel;
+      return { slot: d[0], tool: d[1], abbr: d[2],
+        pick: function () { self.setState({ sel: i }); },
+        pos: 'position: absolute; left: ' + (x - 32) + 'px; top: ' + (y - 32) + 'px; width: 64px; height: 64px; display: grid; place-items: center; background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit; color: ' + (on ? '#f4f4f2' : '#2a2a28') + ';',
+        gem: 'width: 48px; height: 48px; transform: rotate(45deg); display: grid; place-items: center; border: ' + (on ? '3px' : '2px') + ' solid #2a2a28; background: ' + (on ? '#2a2a28' : '#f4f4f2') + ';' };
+    });
+    var d = defs[this.state.sel];
+    return {
+      slots: slots,
+      cur: { slot: d[0].toUpperCase(), tool: d[1], rarity: d[3] },
+      stats: [
+        { k: 'Années d’expérience', v: '[X]' },
+        { k: 'Projets livrés', v: '[X]' },
+        { k: 'Ateliers animés', v: '[X]' },
+        { k: 'Composants créés', v: '[X]' },
+        { k: 'Sessions d’observation', v: '[X]' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

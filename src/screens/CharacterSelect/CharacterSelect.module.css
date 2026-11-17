@@ -1,0 +1,314 @@
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--c-bg-select);
+}
+.bg {
+  position: absolute !important;
+  inset: 0;
+}
+.bgHatch {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+}
+
+.nameplate {
+  position: absolute !important;
+  left: 36px;
+  top: 36px;
+  z-index: 6;
+  width: 300px;
+  height: 90px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+  transform: rotate(-2deg);
+  animation: kf-in-left 0.6s var(--ease-out) backwards;
+}
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  letter-spacing: 0.04em;
+}
+.nameHint {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+}
+
+.dragZone {
+  position: absolute;
+  left: 248px;
+  top: 78px;
+  width: 744px;
+  height: 744px;
+  z-index: 2;
+  border-radius: var(--r-pill);
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.dial {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.dial svg {
+  position: absolute;
+  inset: 0;
+}
+.ring {
+  transform-origin: 620px 450px;
+  transition: transform 0.7s ease;
+}
+
+.hero {
+  position: absolute !important;
+  left: 475px;
+  top: 200px;
+  z-index: 3;
+  width: 290px;
+  height: 500px;
+  background: var(--c-stone-2);
+  border: var(--bw-thick) solid var(--c-ink);
+  box-shadow: var(--sh-lifted);
+  pointer-events: none;
+}
+
+.medal {
+  position: absolute;
+  z-index: 4;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: left 0.7s ease, top 0.7s ease;
+  animation: kf-pop 0.5s 0.2s var(--ease-spring) backwards;
+}
+.disc {
+  display: grid !important;
+  place-items: center;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+  font-size: 18px;
+  font-weight: var(--fw-black);
+  transition: all 0.5s ease;
+}
+.medal[aria-pressed='true'] .disc {
+  border-width: var(--bw-heavy);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: 26px;
+  box-shadow: 0 0 0 8px rgba(244, 244, 242, 0.9), 0 0 0 10px var(--c-ink);
+}
+.medal:hover .disc {
+  transform: scale(1.06);
+}
+.medalLabel {
+  padding: 2px 8px;
+  background: var(--c-paper);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+}
+
+.turn {
+  position: absolute;
+  top: 422px;
+  z-index: 5;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+  font-size: 22px;
+  font-weight: var(--fw-black);
+  cursor: pointer;
+}
+
+.ribbon {
+  position: absolute;
+  left: 440px;
+  top: 676px;
+  z-index: 4;
+  width: 360px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-ink);
+  color: var(--c-paper);
+}
+.ribbonName {
+  font-size: 19px;
+  font-weight: var(--fw-black);
+}
+.ribbonSub {
+  font-size: var(--fs-sm);
+}
+
+.seal {
+  position: absolute;
+  left: 550px;
+  top: 752px;
+  z-index: 5;
+  width: 140px;
+  height: 140px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-spring);
+}
+.seal:hover {
+  transform: scale(1.05) rotate(-4deg);
+}
+.sealArt {
+  position: absolute !important;
+  inset: 0;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  box-shadow: inset 0 0 0 6px var(--c-ink), inset 0 0 0 8px var(--c-paper);
+}
+.sealWord {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.2em;
+}
+.sealHint {
+  font-size: var(--fs-xs);
+}
+
+.sheetWrap {
+  position: absolute;
+  left: 1060px;
+  top: 140px;
+  z-index: 4;
+  width: 340px;
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.2));
+}
+.sheet {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;
+  padding: 34px 26px 54px;
+  background: var(--c-paper);
+  border-top: var(--bw) solid var(--c-ink);
+}
+.sheetPin {
+  position: absolute;
+  left: 1214px;
+  top: 124px;
+  z-index: 5;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  background: var(--c-ink);
+}
+.kicker {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  color: var(--c-ink-soft);
+}
+.className {
+  margin: 0;
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-black);
+  line-height: 1.1;
+}
+.line {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  font-style: italic;
+}
+.pitch {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.55;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chips li {
+  padding: 3px 10px;
+  border: var(--bw-hair) solid var(--c-ink);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+}
+.quests {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.quests li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-base);
+}
+.diamond {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--c-ink);
+  transform: rotate(45deg);
+}
+
+.quick {
+  position: absolute;
+  left: 36px;
+  bottom: 30px;
+  z-index: 6;
+  display: flex;
+  gap: 18px;
+}
+.quickItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  cursor: pointer;
+}
+.quickIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+}
+.quickIcon[data-on='true'] {
+  background: var(--c-ink);
+}

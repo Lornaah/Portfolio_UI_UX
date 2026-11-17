@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Talents, trois arbres</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2a2a28}
+.ph{background-color:#e3e3e0;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#b5b5b0 50%,transparent calc(50% + 1px))}
+.ripped{clip-path:polygon(4% 0,100% 0,100% 100%,3% 100%,6% 96%,2% 91%,5% 86%,1% 80%,5% 74%,2% 68%,6% 62%,1% 56%,4% 50%,0 44%,5% 38%,2% 32%,6% 26%,1% 20%,4% 14%,0 8%,3% 4%)}
+.ribbon2{clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%)}
+a{color:#2a2a28}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #b9b9b5">
+  <div class="ph" style="position: absolute; inset: 0; opacity: .3"></div>
+
+  <div style="position: absolute; left: 50px; top: 46px; width: 1340px; height: 820px; transform: rotate(-.6deg); background: #f4f4f2; border: 2px solid #2a2a28; box-shadow: 0 18px 34px rgba(0,0,0,.25)">
+    <div style="position: absolute; left: 36px; top: 24px; display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">GRIMOIRE</span>
+      <span style="font-size: 30px; font-weight: 800">Talents</span>
+      <span style="font-size: 13px; color: #5f5f5b">3 arbres · [X] points investis</span>
+    </div>
+    <div style="position: absolute; left: 446px; top: 110px; bottom: 30px; width: 0; border-left: 1.5px dashed #c4c4c0"></div>
+    <div style="position: absolute; left: 892px; top: 110px; bottom: 30px; width: 0; border-left: 1.5px dashed #c4c4c0"></div>
+
+    <svg width="1340" height="820" viewBox="0 0 1340 820" style="position: absolute; inset: 0" aria-hidden="true">
+      <path d="{{lines}}" stroke="#2a2a28" stroke-width="2" fill="none"/>
+      <path d="{{dashed}}" stroke="#8a8a86" stroke-width="2" stroke-dasharray="5 5" fill="none"/>
+    </svg>
+
+    <sc-for list="{{roots}}" as="r" hint-placeholder-count="3">
+      <div style="{{r.style}}">
+        <span style="width: 74px; height: 74px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: grid; place-items: center; font-size: 16px; font-weight: 800; box-shadow: 0 0 0 6px #f4f4f2, 0 0 0 8px #2a2a28">{{r.short}}</span>
+        <span class="ribbon2" style="margin-top: 12px; padding: 6px 26px; background: #2a2a28; color: #f4f4f2; font-size: 13px; font-weight: 800; white-space: nowrap">{{r.name}} · {{r.points}}</span>
+      </div>
+    </sc-for>
+
+    <sc-for list="{{nodes}}" as="n" hint-placeholder-count="36">
+      <button type="button" onClick="{{n.pick}}" aria-label="{{n.label}}" aria-pressed="{{n.pressed}}" style="{{n.style}}">
+        <span style="{{n.dot}}"></span>
+        <span style="{{n.lab}}">{{n.label}}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
+    <section aria-label="Page du talent" class="ripped" style="{{pageStyle}}">
+      <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">{{sel.crumb}}</span>
+      <span style="font-size: 32px; font-weight: 800; line-height: 1.1">{{sel.label}}</span>
+      <span style="align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: .1em; border: 2px solid #2a2a28; padding: 4px 10px; transform: rotate(-4deg)">{{sel.status}}</span>
+      <div class="ph" style="height: 190px; border: 2px solid #2a2a28; transform: rotate(-1deg)"></div>
+      <span style="font-size: 15px; line-height: 1.6">{{sel.desc}}</span>
+      <span style="font-size: 11px; letter-spacing: .16em; color: #5f5f5b">UTILISÉ DANS</span>
+      <span style="font-size: 14px; line-height: 1.6">[Projets liés → faits d'armes]</span>
+      <button type="button" onClick="{{close}}" style="margin-top: auto; align-self: flex-start; height: 44px; padding: 0 18px; border: 2px solid #2a2a28; background: transparent; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Reposer la page</button>
+    </section>
+  </sc-if>
+
+  <a href="HUD.dc.html" aria-label="Fermer" style="position: absolute; right: 22px; top: 18px; width: 60px; height: 60px; border-radius: 999px; background: #2a2a28; color: #f4f4f2; display: grid; place-items: center; font-size: 22px; text-decoration: none; z-index: 10">✕</a>
+  <span style="position: absolute; left: 470px; top: 64px; font-size: 12px; color: #2b5fab; background: #f4f4f2; padding: 3px 8px; z-index: 9">Clic sur un talent : une page est arrachée du grimoire et se pose par-dessus, du côté opposé</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 'ui/ux-0-1' }; }
+  renderVals() {
+    var self = this;
+    var data = [
+      { short: 'UI/UX', name: 'UI/UX Designer', branches: [
+        ['Recherche', [['Entretiens', 'Entretiens semi-directifs avec des utilisateurs experts.'], ['Observation', 'Sessions d’observation en situation réelle.'], ['Ateliers', 'Animation d’ateliers de co-conception.']]],
+        ['Conception', [['Audit UX', 'Repérage des frictions sur une version en production.'], ['Parcours', 'Cartographie et simplification des parcours.'], ['Prototypage', 'Prototypes interactifs dans Figma.']]],
+        ['Interface', [['Composants', 'Bibliothèque de composants réutilisables.'], ['Design system', 'Règles, états, variantes, tokens.'], ['Micro-interact.', 'Survols, transitions, retours d’état.']]]
+      ]},
+      { short: 'DEV', name: 'Développeuse', branches: [
+        ['Front', [['Java Swing', 'Composants pour une application métier desktop.'], ['React', 'Sites et apps web clients.'], ['Godot', 'Projets de jeu personnels.']]],
+        ['Back', [['Spring', 'Services Java et micro-services.'], ['API REST', 'Conception et intégration d’API.'], ['Supabase', 'Base de données et authentification.']]],
+        ['Méthode', [['MVVM', 'Architecture d’écrans maintenables.'], ['Code review', 'Conventions et revues entre pairs.'], ['CodinGame', 'Bots heuristiques en compétition.']]]
+      ]},
+      { short: 'ILLU', name: 'Illustratrice', branches: [
+        ['Identité', [['Logo', 'Logos et monogrammes pour des clients.'], ['Charte', 'Chartes graphiques : couleurs, typos, usages.'], ['Déclinaisons', 'Cartes, en-têtes, réseaux sociaux.']]],
+        ['Illustration', [['Vectoriel', 'Illustrations vectorielles sur mesure.'], ['Icônes', 'Jeux d’icônes cohérents.'], ['Personnages', 'Personnages et mascottes.']]],
+        ['Supports', [['Print', 'Flyers, affiches, cartes.'], ['Web', 'Visuels de sites et bannières.'], ['Signalétique', 'Panneaux et supports physiques.']]]
+      ]}
+    ];
+    var pending = { 'dev-0-2': true, 'dev-2-2': true, 'illu-1-2': true, 'illu-2-2': true };
+    var colW = 446, rootY = 680, branchY = 555, leafY = [450, 355, 260], bdx = [-140, 0, 140], zig = [-24, 24, -24];
+    var lines = '', dashed = '', nodes = [], roots = [], sel = null, selCol = 0;
+    data.forEach(function (t, ti) {
+      var cx = colW * ti + colW / 2;
+      var key = t.short.toLowerCase();
+      roots.push({ short: t.short, name: t.name, points: '[X] pts',
+        style: 'position: absolute; left: ' + (cx - 110) + 'px; top: ' + (rootY - 37) + 'px; width: 220px; display: flex; flex-direction: column; align-items: center;' });
+      t.branches.forEach(function (b, bi) {
+        var bx = cx + bdx[bi];
+        lines += 'M' + cx + ' ' + rootY + ' C' + cx + ' ' + (rootY - 60) + ' ' + bx + ' ' + (branchY + 60) + ' ' + bx + ' ' + branchY + ' ';
+        var bid = key + '-' + bi + '-b';
+        nodes.push(mk(b[0], bx, branchY, 52, bid, true, t.name + ' · branche', 'Branche ' + b[0] + ' : ses talents montent au-dessus.', 'BRANCHE', ti));
+        var px = bx, py = branchY;
+        b[1].forEach(function (l, li) {
+          var lx = bx + zig[li], ly = leafY[li], id = key + '-' + bi + '-' + li, learned = !pending[id];
+          var seg = 'M' + px + ' ' + py + ' L' + lx + ' ' + ly + ' ';
+          if (learned) { lines += seg; } else { dashed += seg; }
+          nodes.push(mk(l[0], lx, ly, 42, id, learned, t.name + ' · ' + b[0], l[1], learned ? 'ACQUIS' : 'EN COURS', ti));
+          px = lx; py = ly;
+        });
+      });
+    });
+    function mk(label, x, y, size, id, learned, crumb, desc, status, col) {
+      var on = id === self.state.sel;
+      if (on) { sel = { label: label, crumb: crumb.toUpperCase(), desc: desc, status: status }; selCol = col; }
+      return { label: label, pressed: String(on), pick: function () { self.setState({ sel: id }); },
+        style: 'position: absolute; left: ' + (x - 44) + 'px; top: ' + (y - size / 2) + 'px; width: 88px; display: flex; flex-direction: column; align-items: center; gap: 3px; background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit; color: #2a2a28;',
+        dot: 'width: ' + size + 'px; height: ' + size + 'px; border-radius: 999px; box-sizing: border-box; border: ' + (on ? '4px solid #2a2a28' : (learned ? '2px solid #2a2a28' : '2px dashed #8a8a86')) + '; background: ' + (on ? '#2a2a28' : (learned ? '#dcdcd8' : '#f4f4f2')) + '; box-shadow: ' + (on ? '0 0 0 5px #f4f4f2, 0 0 0 7px #2a2a28' : 'none') + ';',
+        lab: 'font-size: 11px; font-weight: 700; line-height: 1.2; text-align: center; background: #f4f4f2; padding: 0 3px; color: ' + (learned ? '#2a2a28' : '#5f5f5b') + ';' };
+    }
+    var left = selCol === 2 ? 90 : 930;
+    var rot = selCol === 2 ? -3 : 3;
+    return { lines: lines, dashed: dashed, nodes: nodes, roots: roots, sel: sel || { label: '', crumb: '', desc: '', status: '' }, hasSel: !!sel,
+      close: function () { self.setState({ sel: '' }); },
+      pageStyle: 'position: absolute; left: ' + left + 'px; top: 120px; width: 420px; height: 680px; transform: rotate(' + rot + 'deg); background: #ecece9; border-top: 2px solid #2a2a28; border-bottom: 2px solid #2a2a28; box-sizing: border-box; padding: 34px 34px 30px 50px; display: flex; flex-direction: column; gap: 12px; z-index: 8; box-shadow: 0 24px 40px rgba(0,0,0,.35);' };
+  }
+}
+</script>
+</body>
+</html>

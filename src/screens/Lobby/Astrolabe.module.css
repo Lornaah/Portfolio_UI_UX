@@ -1,0 +1,179 @@
+.astro {
+  position: absolute;
+  left: 1232px;
+  top: 0;
+  z-index: var(--z-hud);
+  width: 180px;
+  height: 260px;
+  text-decoration: none;
+  animation: kf-drop-top 0.8s 0.2s var(--ease-pop) backwards;
+}
+
+.pendulum {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-origin: 50% 0;
+  animation: kf-pendulum 5s ease-in-out infinite;
+}
+
+.chain {
+  position: absolute;
+  left: 89px;
+  top: 0;
+  width: 3px;
+  height: 34px;
+  background: repeating-linear-gradient(var(--c-ink) 0 6px, transparent 6px 9px);
+}
+
+.hook {
+  position: absolute;
+  left: 80px;
+  top: 28px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-pill);
+  border: var(--bw-thick) solid var(--c-ink);
+}
+
+.dial {
+  position: absolute !important;
+  left: 10px;
+  top: 44px;
+  width: 160px;
+  height: 160px;
+  transition: transform 0.3s var(--ease-spring);
+}
+.astro:hover .dial,
+.astro:focus-visible .dial {
+  transform: scale(1.1);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  display: block;
+  animation: kf-spin 60s linear infinite;
+}
+.astro:hover .ring {
+  animation-duration: 8s;
+}
+
+.ringFace {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: var(--bw-heavy) solid var(--c-ink);
+}
+
+.ticks {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-pill);
+  background: repeating-conic-gradient(var(--c-ink) 0 1.2deg, transparent 1.2deg 10deg);
+  mask: radial-gradient(circle, transparent 66px, #000 67px, #000 74px, transparent 75px);
+}
+
+.cardinal {
+  position: absolute;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+  background: var(--c-paper);
+  padding: 0 2px;
+}
+.n {
+  left: 50%;
+  top: -3px;
+  transform: translateX(-50%);
+  font-size: var(--fs-xs);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  padding: 0 5px;
+  border-radius: var(--r-xs);
+}
+.s { left: 50%; bottom: -3px; transform: translateX(-50%); }
+.e { top: 50%; right: -1px; transform: translateY(-50%); }
+.o { top: 50%; left: -1px; transform: translateY(-50%); }
+
+.mini {
+  position: absolute !important;
+  inset: 24px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+}
+
+.mpin {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px 999px 999px 0;
+  background: var(--c-ink);
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.3, 1.8, 0.5, 1);
+}
+.astro:hover .mpin,
+.astro:focus-visible .mpin {
+  transform: scale(1);
+}
+
+.needle {
+  position: absolute;
+  left: 44px;
+  top: 44px;
+  width: 72px;
+  height: 72px;
+  background: var(--c-ink);
+  animation: kf-wobble 6s ease-in-out infinite;
+}
+
+.blip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
+  border: var(--bw-thick) solid var(--c-ink);
+  animation: kf-blip 1.6s ease-out infinite;
+}
+
+.knob {
+  position: absolute;
+  right: 2px;
+  top: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-pill);
+  background: var(--c-stone-1);
+  border: var(--bw) solid var(--c-ink);
+}
+
+.place {
+  position: absolute;
+  left: 50%;
+  top: 210px;
+  transform: translateX(-50%);
+  padding: 3px 12px;
+  white-space: nowrap;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  top: 236px;
+  transform: translateX(-50%);
+  padding: 0 5px;
+  white-space: nowrap;
+  background: var(--c-paper);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+}
