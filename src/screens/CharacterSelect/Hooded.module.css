@@ -1,0 +1,84 @@
+.figure {
+  position: absolute;
+  inset: 0;
+}
+.pose {
+  position: absolute !important;
+  inset: 0;
+  transition: opacity 0.28s ease;
+}
+.cloak {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 120px;
+  bottom: 0;
+  background: var(--c-hooded);
+  border: var(--bw) solid var(--c-stone-3);
+  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+}
+.hood {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 140px;
+  height: 170px;
+  margin-left: -70px;
+  background: var(--c-hooded);
+  border: var(--bw) solid var(--c-stone-3);
+  border-radius: 50% 50% 42% 42% / 62% 62% 38% 38%;
+}
+.hood[data-pose='back']::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  bottom: 18px;
+  border-left: var(--bw-hair) solid var(--c-ink);
+}
+.face {
+  position: absolute;
+  top: 46px;
+  width: 78px;
+  height: 100px;
+  border-radius: 50% 50% 46% 46% / 55% 55% 45% 45%;
+  background: radial-gradient(ellipse at 50% 70%, #3a3a37, #121211 70%);
+  display: none;
+}
+.face[data-pose='three'] {
+  display: block;
+  left: 58px;
+  width: 62px;
+}
+.face[data-pose='front'] {
+  display: block;
+  left: 31px;
+}
+
+.emblem {
+  position: absolute !important;
+  left: 50%;
+  top: 230px;
+  width: 64px;
+  height: 64px;
+  margin-left: -32px;
+  display: grid !important;
+  place-items: center;
+  border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-black);
+  transition: opacity 0.3s;
+}
+.accessory {
+  position: absolute !important;
+  right: -6px;
+  top: 250px;
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper-2);
+  transition: opacity 0.3s;
+}
+.accessory[data-cls='uiux'] { width: 12px; height: 150px; transform: rotate(14deg); border-radius: 6px 6px 2px 2px; }
+.accessory[data-cls='dev'] { width: 96px; height: 40px; right: -40px; top: 330px; border-radius: 4px; background-image: repeating-linear-gradient(90deg, var(--c-ink) 0 1px, transparent 1px 12px); }
+.accessory[data-cls='illu'] { width: 14px; height: 140px; transform: rotate(-12deg); border-radius: 2px 2px 7px 7px; border-top-width: 18px; }

@@ -17,6 +17,8 @@ interface ImageSlotProps {
   plain?: boolean;
   children?: ReactNode;
   as?: 'div' | 'span';
+  /** Attributs data-* transmis à l'élément (états pour le CSS). */
+  [dataAttr: `data-${string}`]: string | boolean | undefined;
 }
 
 /**
@@ -25,13 +27,13 @@ interface ImageSlotProps {
  * - sinon → hachure grise (ou `placeholder`) + libellé optionnel
  * Les enfants sont toujours rendus par-dessus.
  */
-export function ImageSlot({ id, className, style, showLabel, label, placeholder, plain, children, as = 'div' }: ImageSlotProps) {
+export function ImageSlot({ id, className, style, showLabel, label, placeholder, plain, children, as = 'div', ...data }: ImageSlotProps) {
   const asset = getImage(id);
   const Tag = as;
   const ready = Boolean(asset.src);
   const cls = [styles.slot, !ready && !placeholder && !plain ? 'hatch' : '', className].filter(Boolean).join(' ');
   return (
-    <Tag className={cls} style={style} data-asset={id} data-asset-status={ready ? 'ready' : 'missing'}>
+    <Tag {...data} className={cls} style={style} data-asset={id} data-asset-status={ready ? 'ready' : 'missing'}>
       {ready ? (
         <img className={styles.img} src={asset.src} alt={asset.alt ?? ''} draggable={false} />
       ) : (

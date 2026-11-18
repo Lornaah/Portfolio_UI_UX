@@ -17,26 +17,26 @@ export interface AssetEntry {
 }
 
 export const images: Record<string, AssetEntry> = {
-  // 01 · Révélation
-  'reveal.cover': { label: 'Couverture / feuilles empilées, nom au centre' },
-  'reveal.leaf-left': { label: 'Battant gauche (feuille / page)' },
-  'reveal.leaf-right': { label: 'Battant droit (feuille / page)' },
-  'reveal.layer.back': { label: 'Calque fond' },
-  'reveal.layer.mid': { label: 'Calque décor' },
-  'reveal.layer.front': { label: 'Calque avant-plan' },
+  // 01 · Ouverture (lanterne)
+  'intro.hand': { label: 'Main qui tient la lanterne' },
+  'intro.lantern': { label: 'Lanterne (éteinte / allumée)' },
+  'intro.flame': { label: 'Flamme de la lanterne' },
 
-  // 02 · Sélection du personnage
-  'select.background': { label: 'Fond de la sélection' },
+  // 02 · Sélection du personnage (armurerie)
+  'select.armory': { label: 'Armurerie (décor de fond)' },
   'select.nameplate': { label: 'Lettrage du nom' },
-  'select.dial': { label: 'Cadran rotatif' },
-  'select.hero.uiux': { label: 'Justine en pied · tenue UI/UX Designer' },
-  'select.hero.dev': { label: 'Justine en pied · tenue Développeuse' },
-  'select.hero.illu': { label: 'Justine en pied · tenue Illustratrice' },
-  'select.medallion.uiux': { label: 'Médaillon UI/UX' },
-  'select.medallion.dev': { label: 'Médaillon DEV' },
-  'select.medallion.illu': { label: 'Médaillon ILLU' },
+  'select.platform': { label: 'Plateforme runique au sol' },
+  'select.brazier': { label: 'Brasero' },
+  'select.hero.back': { label: 'Silhouette encapuchonnée · de dos' },
+  'select.hero.three': { label: 'Silhouette encapuchonnée · trois-quarts' },
+  'select.hero.front': { label: 'Silhouette encapuchonnée · de face, visage dans l’ombre' },
+  'select.accessory.uiux': { label: 'Accessoire UI/UX (stylet)' },
+  'select.accessory.dev': { label: 'Accessoire DEV (clavier)' },
+  'select.accessory.illu': { label: 'Accessoire ILLU (pinceau)' },
+  'select.emblem.uiux': { label: 'Emblème UI/UX' },
+  'select.emblem.dev': { label: 'Emblème DEV' },
+  'select.emblem.illu': { label: 'Emblème ILLU' },
   'select.sheet': { label: 'Fiche déchirée (papier)' },
-  'select.seal': { label: 'Sceau DISCOVER' },
 
   // 03 · Lancement
   'launch.illustration': { label: 'Illustration de la zone de départ' },
@@ -105,6 +105,9 @@ export const images: Record<string, AssetEntry> = {
 /** Sons (vides : aucun fichier n'est chargé tant que src n'est pas renseigné). */
 export const sounds: Record<string, AssetEntry> = {
   'music.lute': { label: 'Musique au luth (boucle)' },
+  'sfx.intro.ignite': { label: 'Ouverture · la lanterne s’allume' },
+  'sfx.fire.loop': { label: 'Feu doux des braseros (boucle)' },
+  'sfx.select.class': { label: 'Sélection · changement de classe' },
   'sfx.hover': { label: 'Survol d’une gemme' },
   'sfx.click': { label: 'Clic / sort lancé' },
   'sfx.unroll': { label: 'Parchemin qui se déroule' },

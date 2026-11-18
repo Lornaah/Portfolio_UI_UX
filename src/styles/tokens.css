@@ -117,3 +117,10 @@
   --stage-w: 1440px;
   --stage-h: 900px;
 }
+
+/* ── Ouverture (lanterne) ────────────────────────────── */
+:root {
+  --c-cine-black: #0f0f0e;
+  --c-cine-text: #e3e3e0;
+  --c-hooded: #34342f;   /* silhouette encapuchonnée */
+}

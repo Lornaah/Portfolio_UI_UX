@@ -3,6 +3,10 @@
 Portfolio UI/UX sous forme d'interface de MMO-RPG medieval fantasy.
 Spécifications : `docs/portfolio-mmo-wireframes/` (HANDOFF.md + maquettes).
 
+## Démo autonome
+
+`npm run build:demo` produit `dist-demo/portfolio-demo.html`, un fichier unique consultable sans serveur, avec un menu « Démo · écrans ».
+
 ## Lancer
 
 ```bash
@@ -16,9 +20,9 @@ npm run lint
 
 | Route | Écran |
 |---|---|
-| `/` | 01 · Révélation (passable, Échap ; second passage → sélection) |
-| `/selection` | 02 · Sélection du personnage |
-| `/lancement` | 03 · Lancement (précharge les écrans du jeu) |
+| `/` | 01 + 02 · Ouverture à la lanterne, puis sélection du personnage dans l'armurerie (passable, Échap ; second passage : pièce déjà éclairée) |
+| `/selection` | 02 · Sélection seule |
+| `/lancement` | 03 · Ancien écran de chargement (hors parcours, Jouer mène directement au lobby) |
 | `/jeu` | 04 · Lobby (HUD) |
 | `/jeu/talents` · `/jeu/personnage` · `/jeu/carte` · `/jeu/faits-d-armes` | 05–08, par-dessus le lobby |
 | `/version-texte` | Version texte, sans jeu ni animation |

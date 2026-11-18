@@ -1,13 +1,12 @@
 import { Suspense } from 'react';
 import type { ReactNode } from 'react';
-import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DemoNav } from './demo/DemoNav';
 import { Stage } from './components/Stage';
 import { CharacterSelectScreen } from './screens/CharacterSelect/CharacterSelectScreen';
 import { LaunchScreen } from './screens/Launch/LaunchScreen';
 import { AchievementsScreen, CharacterScreen, MapScreen, TalentsScreen } from './screens/lazy';
 import { GameLayout } from './screens/Lobby/GameLayout';
-import { RevealScreen } from './screens/Reveal/RevealScreen';
 import { TextVersionScreen } from './screens/TextVersion/TextVersionScreen';
 import { SettingsProvider } from './state/Settings';
 
@@ -16,6 +15,12 @@ const IS_DEMO = import.meta.env.VITE_DEMO === 'true';
 /** En démo (fichier unique, sans serveur), les routes vivent en mémoire : aucune URL à gérer. */
 function Router({ children }: { children: ReactNode }) {
   return IS_DEMO ? <MemoryRouter>{children}</MemoryRouter> : <BrowserRouter>{children}</BrowserRouter>;
+}
+
+/** Ouverture + sélection : remontée à chaque navigation (permet de rejouer l'ouverture). */
+function OpeningRoute() {
+  const location = useLocation();
+  return <CharacterSelectScreen key={location.key} />;
 }
 
 export function App() {
@@ -31,7 +36,7 @@ export function App() {
               <Stage>
                 <Suspense fallback={null}>
                   <Routes>
-                    <Route path="/" element={<RevealScreen />} />
+                    <Route path="/" element={<OpeningRoute />} />
                     <Route path="/selection" element={<CharacterSelectScreen />} />
                     <Route path="/lancement" element={<LaunchScreen />} />
                     <Route path="/jeu" element={<GameLayout />}>

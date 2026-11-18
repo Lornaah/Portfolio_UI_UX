@@ -3,9 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './DemoNav.module.css';
 
 const SCREENS = [
-  { to: '/', label: '01 · Révélation', replay: true },
-  { to: '/selection', label: '02 · Sélection du personnage' },
-  { to: '/lancement', label: '03 · Lancement' },
+  { to: '/', label: '01 · Ouverture (lanterne) + sélection', replay: true },
   { to: '/jeu', label: '04 · Lobby (HUD)' },
   { to: '/jeu/talents', label: '05 · Talents' },
   { to: '/jeu/personnage', label: '06 · Fiche personnage' },
@@ -36,13 +34,14 @@ export function DemoNav() {
                 onClick={() => {
                   if (s.replay) {
                     try {
-                      localStorage.removeItem('portfolio-mmo.revealed');
+                      localStorage.removeItem('portfolio-mmo.lantern-lit');
                     } catch {
                       /* ignore */
                     }
                   }
                   setOpen(false);
-                  navigate(s.to);
+                  // Remonte l'écran pour rejouer l'ouverture même si on y est déjà
+                  navigate(s.to, { state: { replay: Date.now() } });
                 }}
               >
                 {s.label}
