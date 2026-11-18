@@ -1,5 +1,7 @@
 import { Suspense } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { DemoNav } from './demo/DemoNav';
 import { Stage } from './components/Stage';
 import { CharacterSelectScreen } from './screens/CharacterSelect/CharacterSelectScreen';
 import { LaunchScreen } from './screens/Launch/LaunchScreen';
@@ -9,9 +11,16 @@ import { RevealScreen } from './screens/Reveal/RevealScreen';
 import { TextVersionScreen } from './screens/TextVersion/TextVersionScreen';
 import { SettingsProvider } from './state/Settings';
 
+const IS_DEMO = import.meta.env.VITE_DEMO === 'true';
+
+/** En démo (fichier unique, sans serveur), les routes vivent en mémoire : aucune URL à gérer. */
+function Router({ children }: { children: ReactNode }) {
+  return IS_DEMO ? <MemoryRouter>{children}</MemoryRouter> : <BrowserRouter>{children}</BrowserRouter>;
+}
+
 export function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <SettingsProvider>
         <Routes>
           {/* Version texte : page HTML classique, hors scène de jeu */}
@@ -38,7 +47,8 @@ export function App() {
             }
           />
         </Routes>
+        {IS_DEMO && <DemoNav />}
       </SettingsProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
