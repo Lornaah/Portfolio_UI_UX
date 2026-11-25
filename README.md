@@ -3,6 +3,12 @@
 Portfolio UI/UX sous forme d'interface de MMO-RPG medieval fantasy.
 Spécifications : `docs/portfolio-mmo-wireframes/` (HANDOFF.md + maquettes).
 
+## Mise en ligne sur Render
+
+Le fichier `render.yaml` est un Blueprint Render : site statique, build `npm ci && npm run build`,
+publication de `dist/`, redéploiement automatique à chaque push sur `main`.
+Sur Render : **New → Blueprint**, choisir le dépôt `Lornaah/Portfolio_UI_UX`, valider.
+
 ## Démo autonome
 
 `npm run build:demo` produit `dist-demo/portfolio-demo.html`, un fichier unique consultable sans serveur, avec un menu « Démo · écrans ».
