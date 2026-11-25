@@ -11,9 +11,9 @@ export const dialogueLines: string[] = [
 
 /** Diapos de l'avis « Quête » (défilent toutes les ~4 s). */
 export const questSlides: QuestSlide[] = [
-  { title: '[Dernier projet]', meta: '[dates]' },
-  { title: 'Bibliothèque SmgComponents', meta: 'Légendaire · UI/UX + Dev', achievementId: 'smg' },
-  { title: 'Icône du chatbot Sismo', meta: 'Rare · Illustratrice', achievementId: 'sismo' },
+  { title: '[Dernier projet]', meta: '[dates]', questId: 'dernier' },
+  { title: 'Bibliothèque SmgComponents', meta: 'Légendaire · UI/UX + Dev', questId: 'smg' },
+  { title: 'Icône du chatbot Sismo', meta: 'Rare · Illustratrice', questId: 'sismo' },
 ];
 
 export const notices = {

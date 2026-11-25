@@ -32,6 +32,8 @@
 
 .hero {
   position: absolute !important;
+  animation: kf-breathe 5s ease-in-out infinite;
+  transform-origin: 50% 100%;
   left: 590px;
   top: 170px;
   width: 260px;
@@ -71,13 +73,175 @@
   font-size: var(--fs-base);
 }
 
+.dial {
+  position: absolute;
+  left: 400px;
+  top: 150px;
+  width: 640px;
+  height: 640px;
+  z-index: 3;
+  transition: transform 0.8s var(--ease-out);
+  pointer-events: none;
+}
 .ring {
+  position: absolute;
+  inset: 0;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+.upright {
+  display: grid;
+  place-items: center;
+  transition: transform 0.8s var(--ease-out);
+}
+.slotName {
+  position: absolute;
+  top: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1px 6px;
+  white-space: nowrap;
+  background: var(--c-paper);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.slot:hover .slotName,
+.slot:focus-visible .slotName,
+.slot[aria-pressed='true'] .slotName {
+  opacity: 1;
+}
+.burst {
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--r-pill);
+  border: var(--bw-thick) solid var(--c-ink);
+  animation: kf-burst 0.9s 0.55s var(--ease-out) both;
+  pointer-events: none;
+}
+@keyframes kf-burst {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to { transform: scale(2.4); opacity: 0; }
+}
+.needle {
+  position: absolute;
+  left: 708px;
+  top: 104px;
+  z-index: 4;
+  width: 24px;
+  height: 22px;
+  background: var(--c-ink);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.runeTicks {
+  position: absolute;
+  inset: 40px;
+  border-radius: var(--r-pill);
+  border: 6px dotted var(--c-stone-4);
+  animation: kf-spin 90s linear infinite;
+}
+.heroFlash {
+  position: absolute;
+  left: 560px;
+  top: 150px;
+  width: 320px;
+  height: 640px;
+  z-index: 2;
+  border-radius: var(--r-pill);
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.9), transparent 65%);
+  pointer-events: none;
+}
+.spark {
+  position: absolute;
+  left: 704px;
+  top: 150px;
+  z-index: 5;
+  width: 32px;
+  height: 32px;
+  background: var(--c-light);
+  filter: drop-shadow(0 0 6px var(--c-ink));
+  pointer-events: none;
+}
+.panelZone {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.panelStack {
+  position: absolute;
+  inset: 0;
+}
+.panelStack > * {
+  pointer-events: auto;
+}
+.tall {
+  width: 340px !important;
+  max-height: 690px;
+  overflow: auto;
+}
+.repList,
+.craftList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.repList li,
+.craftList li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: var(--bw-hair) dashed var(--c-stone-3);
+}
+.repWho {
+  font-weight: var(--fw-black);
+  font-size: var(--fs-base);
+}
+.repRole,
+.craftTools {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+}
+.repQuote {
+  font-style: italic;
+  font-size: var(--fs-base);
+}
+.repStanding {
+  align-self: flex-end;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.gauge {
+  display: block;
+  height: 10px;
+  border: var(--bw) solid var(--c-ink);
+  background: var(--c-paper-2);
+}
+.gauge i {
+  display: block;
+  height: 100%;
+  background: var(--c-stone-6);
+}
+.craftHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-base);
+}
+.item[data-rarity='L'] {
+  box-shadow: var(--sh-hard-left), 0 0 0 4px var(--c-paper), 0 0 0 6px var(--c-ink);
+}
 .slot {
   position: absolute;
+  pointer-events: auto;
   width: 64px;
   height: 64px;
   display: grid;
@@ -98,8 +262,9 @@
   background: var(--c-paper);
   transition: transform var(--dur) var(--ease-spring);
 }
-.slot:hover .gem {
-  transform: rotate(45deg) scale(1.12);
+.slot:hover .gem,
+.slot:focus-visible .gem {
+  transform: rotate(45deg) scale(1.15);
 }
 .slot[aria-pressed='true'] .gem {
   border-width: var(--bw-thick);
@@ -255,7 +420,7 @@
   font-size: 15px;
   font-weight: var(--fw-bold);
 }
-.tab[aria-pressed='true'] {
+.tab[aria-selected='true'] {
   width: 230px;
   padding-left: 50px;
   font-weight: var(--fw-black);
@@ -266,11 +431,14 @@
   inset: 0;
   background: var(--c-paper);
 }
-.tab[aria-pressed='true'] .tabShape {
+.tab[aria-selected='true'] .tabShape {
   background: var(--c-ink);
 }
+.tabShape {
+  transition: transform var(--dur) var(--ease-spring);
+}
 .tab:hover .tabShape {
-  transform: translateX(-6px);
+  transform: translateX(-10px);
 }
 .tabLabel {
   position: relative;

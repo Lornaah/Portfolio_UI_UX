@@ -5,7 +5,7 @@ import { DemoNav } from './demo/DemoNav';
 import { Stage } from './components/Stage';
 import { CharacterSelectScreen } from './screens/CharacterSelect/CharacterSelectScreen';
 import { LaunchScreen } from './screens/Launch/LaunchScreen';
-import { AchievementsScreen, CharacterScreen, MapScreen, TalentsScreen } from './screens/lazy';
+import { AchievementsScreen, CharacterScreen, MapScreen, QuestBoardScreen, TalentsScreen } from './screens/lazy';
 import { GameLayout } from './screens/Lobby/GameLayout';
 import { TextVersionScreen } from './screens/TextVersion/TextVersionScreen';
 import { SettingsProvider } from './state/Settings';
@@ -44,6 +44,7 @@ export function App() {
                       <Route path="talents" element={<TalentsScreen />} />
                       <Route path="personnage" element={<CharacterScreen />} />
                       <Route path="carte" element={<MapScreen />} />
+                      <Route path="quetes" element={<QuestBoardScreen />} />
                     </Route>
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>

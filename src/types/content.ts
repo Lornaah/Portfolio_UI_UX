@@ -57,7 +57,8 @@ export interface Scroll {
 export interface QuestSlide {
   title: string;
   meta: string;
-  achievementId?: string;
+  /** Quête ouverte sur le tableau d'affichage. */
+  questId: string;
 }
 
 export type TalentStatus = 'acquired' | 'learning';

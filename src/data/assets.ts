@@ -76,6 +76,12 @@ export const images: Record<string, AssetEntry> = {
   'spell.gem.inventaire': { label: 'Gemme I · Inventaire' },
   'spell.gem.options': { label: 'Gemme O · Options' },
 
+  // Tableau des quêtes
+  'quests.board': { label: 'Tableau d’affichage en bois' },
+  'quests.parchment': { label: 'Parchemin de quête (grand)' },
+  'quests.scrap': { label: 'Bout de papier épinglé' },
+  // 'quests.illustration.<questId>' : illustration de chaque quête
+
   // 05 · Talents
   'talents.background': { label: 'Fond du grimoire' },
   'talents.page': { label: 'Page de grimoire' },

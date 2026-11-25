@@ -15,6 +15,7 @@ const overlayLabels: Record<string, string> = {
   '/jeu/talents': 'Talents',
   '/jeu/personnage': 'Fiche personnage',
   '/jeu/carte': 'Carte du monde',
+  '/jeu/quetes': 'Tableau des quêtes',
 };
 
 /** Fige l'écran sortant pendant son animation de sortie. */

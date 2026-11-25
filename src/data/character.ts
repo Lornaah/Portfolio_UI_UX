@@ -36,4 +36,20 @@ export const characterTabs = [
   { id: 'metiers', label: 'Métiers' },
 ] as const;
 
-export const characterTabPlaceholder = '[Contenu à venir]';
+/** Onglet Réputation : ce que disent les clients et collègues (à remplir). */
+export const reputation = [
+  { who: '[Client grand compte, secteur énergie]', role: '[Poste]', standing: 3, quote: '[Citation courte sur la collaboration]', mission: 'Bibliothèque SmgComponents · Import grid' },
+  { who: '[Coach Pilates indépendante]', role: 'FIT DISTANCE', standing: 3, quote: '[Citation courte]', mission: 'App de coaching' },
+  { who: '[Éducatrice canine]', role: 'AuTour de mon chien', standing: 3, quote: '[Citation courte]', mission: 'Site vitrine' },
+];
+/** Paliers de réputation (jauge). */
+export const standingLabels = ['Inconnue', 'Cordiale', 'Appréciée', 'Recommandée', 'Fidèle'];
+
+/** Onglet Métiers : savoir-faire avec niveau de maîtrise. Les jauges (progress 0 → 1) sont des valeurs d'attente à ajuster. */
+export const crafts = [
+  { name: 'Recherche utilisateur', level: '[X]', max: '[X]', progress: 0.5, tools: 'Entretiens, observation, ateliers' },
+  { name: 'Conception d’interfaces', level: '[X]', max: '[X]', progress: 0.5, tools: 'Figma, design system, prototypage' },
+  { name: 'Développement front', level: '[X]', max: '[X]', progress: 0.5, tools: 'Java Swing, React' },
+  { name: 'Développement back', level: '[X]', max: '[X]', progress: 0.5, tools: 'Spring, API REST, Supabase' },
+  { name: 'Illustration', level: '[X]', max: '[X]', progress: 0.5, tools: 'Logos, icônes, vectoriel' },
+];

@@ -15,7 +15,8 @@ export function QuestNotices() {
   const [hold, setHold] = useState(false);
   const [i] = useRotator(questSlides.length, { paused: hold || reducedMotion });
   const slide = questSlides[i];
-  const to = slide.achievementId ? `/jeu/faits-d-armes?medaille=${slide.achievementId}` : '/jeu/faits-d-armes';
+  // Ouvre le tableau d'affichage, sur la quête affichée
+  const to = `/jeu/quetes?quete=${slide.questId}`;
 
   return (
     <>
